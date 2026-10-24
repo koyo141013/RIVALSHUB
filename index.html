@@ -267,12 +267,17 @@
                                 <i class="fa-solid fa-box text-rose-400"></i> 1 Unit Left
                             </span>
                         </div>
-                        <!-- Price -->
-                        <div class="p-3 bg-slate-950/80 rounded-2xl border border-slate-800">
+                        <!-- Price with Discount -->
+                        <div class="p-3 bg-slate-950/80 rounded-2xl border border-slate-800 col-span-2 sm:col-span-1">
                             <span class="text-gray-400 text-[10px] block uppercase">Price</span>
-                            <span class="text-sm font-bold text-yellow-300 flex items-center gap-1 mt-0.5">
-                                <i class="fa-solid fa-coins text-yellow-400"></i> 70 Robux
-                            </span>
+                            <div class="flex items-center gap-2 mt-0.5 flex-wrap">
+                                <span class="text-sm font-bold text-yellow-300 flex items-center gap-1">
+                                    <i class="fa-solid fa-coins text-yellow-400"></i> 70 Robux
+                                </span>
+                                <span class="text-[10px] font-extrabold font-mono bg-rose-500/20 text-rose-400 border border-rose-500/40 px-2 py-0.5 rounded-full animate-pulse">
+                                    36.36% OFF
+                                </span>
+                            </div>
                         </div>
                     </div>
 
@@ -503,7 +508,12 @@
                     <div class="p-4 bg-slate-950/80 rounded-xl border border-cyan-500/30 flex items-center justify-between">
                         <div>
                             <span class="text-xs text-gray-400 block font-mono">Price</span>
-                            <span class="text-base font-bold text-yellow-300 font-mono">70 Robux</span>
+                            <div class="flex items-center gap-2 mt-0.5">
+                                <span class="text-base font-bold text-yellow-300 font-mono">70 Robux</span>
+                                <span class="text-[10px] font-extrabold font-mono bg-rose-500/20 text-rose-400 border border-rose-500/40 px-2 py-0.5 rounded-full">
+                                    36.36% OFF
+                                </span>
+                            </div>
                         </div>
                         <span class="text-[11px] font-mono bg-emerald-500/20 text-emerald-300 border border-emerald-500/30 px-2.5 py-1 rounded-full">
                             1 Unit Left
@@ -512,237 +522,4 @@
                 </div>
 
                 <button 
-                    onclick="goToStep2()" 
-                    class="w-full py-3.5 px-6 rounded-xl font-display font-bold text-xs uppercase tracking-wider btn-cyber text-white flex items-center justify-center gap-2 cursor-pointer">
-                    <span>Proceed to Payment Instructions</span>
-                    <i class="fa-solid fa-arrow-right"></i>
-                </button>
-            </div>
-
-            <!-- Step 2: Robux Payment Instructions -->
-            <div id="step2" class="hidden">
-                <div class="flex items-center gap-2 mb-4">
-                    <span class="px-2.5 py-0.5 rounded-full bg-purple-500/20 text-purple-300 text-xs font-mono font-bold">Step 2 / 2</span>
-                    <h3 class="font-display text-lg font-bold text-white">Payment Instructions</h3>
-                </div>
-
-                <div class="p-4 bg-slate-950/90 rounded-2xl border border-cyan-500/40 space-y-3 mb-6 text-xs text-gray-300">
-                    <div class="flex gap-2">
-                        <span class="font-mono text-cyber-cyan font-bold">1.</span>
-                        <p>
-                            Send <strong class="text-yellow-300 font-mono">70 Robux</strong> to Roblox Username: 
-                            <span class="bg-black/80 px-2 py-0.5 rounded text-cyber-cyan font-mono font-bold select-all inline-block border border-slate-800">koyohwan2e</span>
-                            <button onclick="copyText('koyohwan2e', this)" class="ml-1 text-xs text-cyan-400 hover:underline">
-                                <i class="fa-regular fa-copy"></i> Copy
-                            </button>
-                        </p>
-                    </div>
-
-                    <div class="flex gap-2">
-                        <span class="font-mono text-cyber-cyan font-bold">2.</span>
-                        <p>Open a ticket in our official Discord server and attach a screenshot proving the Robux transfer.</p>
-                    </div>
-
-                    <div class="flex gap-2">
-                        <span class="font-mono text-cyber-cyan font-bold">3.</span>
-                        <p>Send the screenshot in your Discord ticket. Our administrators will review and verify it quickly.</p>
-                    </div>
-
-                    <div class="flex gap-2">
-                        <span class="font-mono text-cyber-cyan font-bold">4.</span>
-                        <p>After verification, you will receive your official key site link directly from an administrator.</p>
-                    </div>
-                </div>
-
-                <div class="space-y-3">
-                    <a 
-                        href="https://discord.gg/FXkppbKqr" 
-                        target="_blank" 
-                        rel="noopener noreferrer" 
-                        class="w-full py-3.5 px-6 rounded-xl font-display font-bold text-xs uppercase tracking-wider btn-discord text-white flex items-center justify-center gap-2 cursor-pointer">
-                        <i class="fa-brands fa-discord text-base"></i>
-                        <span>Open Discord Ticket Now</span>
-                    </a>
-                    
-                    <button 
-                        onclick="backToStep1()" 
-                        class="w-full py-2.5 px-4 rounded-xl text-xs font-mono text-gray-400 hover:text-white transition-colors text-center">
-                        ← Back to previous step
-                    </button>
-                </div>
-            </div>
-
-        </div>
-    </div>
-
-    <!-- JavaScript Interactive Logic -->
-    <script>
-        function toggleModal(modalId) {
-            const modal = document.getElementById(modalId);
-            if (modal) {
-                modal.classList.toggle('hidden');
-            }
-        }
-
-        function goToStep2() {
-            const discordUser = document.getElementById('discordUser').value.trim();
-            if (!discordUser) {
-                alert('Please enter your Discord username or ID before proceeding.');
-                return;
-            }
-            document.getElementById('step1').classList.add('hidden');
-            document.getElementById('step2').classList.remove('hidden');
-        }
-
-        function backToStep1() {
-            document.getElementById('step2').classList.add('hidden');
-            document.getElementById('step1').classList.remove('hidden');
-        }
-
-        function copyText(text, btn) {
-            const temp = document.createElement("input");
-            temp.value = text;
-            document.body.appendChild(temp);
-            temp.select();
-            document.execCommand("copy");
-            document.body.removeChild(temp);
-
-            const orig = btn.innerHTML;
-            btn.innerHTML = '<i class="fa-solid fa-check text-emerald-400"></i> Copied!';
-            setTimeout(() => { btn.innerHTML = orig; }, 2000);
-        }
-
-        /* Lightning Canvas Animation */
-        const canvas = document.getElementById('cyberCanvas');
-        const ctx = canvas.getContext('2d');
-
-        let width, height;
-        let bolts = [];
-        let particles = [];
-
-        function resizeCanvas() {
-            width = canvas.width = window.innerWidth;
-            height = canvas.height = window.innerHeight;
-        }
-        window.addEventListener('resize', resizeCanvas);
-        resizeCanvas();
-
-        class LightningBolt {
-            constructor() {
-                this.reset();
-            }
-
-            reset() {
-                this.x = Math.random() * width;
-                this.y = 0;
-                this.path = [{ x: this.x, y: this.y }];
-                this.life = Math.floor(Math.random() * 18) + 12;
-                this.maxLife = this.life;
-                this.width = Math.random() * 2.8 + 1.2;
-
-                let currentX = this.x;
-                let currentY = this.y;
-
-                while (currentY < height) {
-                    currentX += (Math.random() - 0.5) * 50;
-                    currentY += Math.random() * 35 + 15;
-                    this.path.push({ x: currentX, y: currentY });
-
-                    if (Math.random() < 0.25) {
-                        particles.push(new CyberParticle(currentX, currentY));
-                    }
-                }
-            }
-
-            draw() {
-                ctx.save();
-                ctx.beginPath();
-                ctx.moveTo(this.path[0].x, this.path[0].y);
-
-                for (let i = 1; i < this.path.length; i++) {
-                    ctx.lineTo(this.path[i].x, this.path[i].y);
-                }
-
-                ctx.strokeStyle = `rgba(0, 240, 255, ${this.life / this.maxLife})`;
-                ctx.lineWidth = this.width;
-                ctx.shadowBlur = 20;
-                ctx.shadowColor = '#00f0ff';
-                ctx.stroke();
-
-                ctx.strokeStyle = `rgba(255, 255, 255, ${this.life / this.maxLife})`;
-                ctx.lineWidth = this.width * 0.4;
-                ctx.stroke();
-
-                ctx.restore();
-            }
-
-            update() {
-                this.life--;
-            }
-        }
-
-        class CyberParticle {
-            constructor(x, y) {
-                this.x = x || Math.random() * width;
-                this.y = y || Math.random() * height;
-                this.vx = (Math.random() - 0.5) * 2.2;
-                this.vy = (Math.random() - 0.5) * 2.2;
-                this.size = Math.random() * 2 + 0.8;
-                this.life = Math.random() * 50 + 25;
-                this.maxLife = this.life;
-                this.color = Math.random() > 0.4 ? '#00f0ff' : '#a855f7';
-            }
-
-            update() {
-                this.x += this.vx;
-                this.y += this.vy;
-                this.life--;
-            }
-
-            draw() {
-                ctx.save();
-                ctx.globalAlpha = this.life / this.maxLife;
-                ctx.fillStyle = this.color;
-                ctx.shadowBlur = 8;
-                ctx.shadowColor = this.color;
-                ctx.beginPath();
-                ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
-                ctx.fill();
-                ctx.restore();
-            }
-        }
-
-        for (let i = 0; i < 40; i++) {
-            particles.push(new CyberParticle());
-        }
-
-        function animate() {
-            ctx.clearRect(0, 0, width, height);
-
-            if (Math.random() < 0.04) {
-                bolts.push(new LightningBolt());
-            }
-
-            for (let i = bolts.length - 1; i >= 0; i--) {
-                bolts[i].draw();
-                bolts[i].update();
-                if (bolts[i].life <= 0) bolts.splice(i, 1);
-            }
-
-            for (let i = particles.length - 1; i >= 0; i--) {
-                particles[i].draw();
-                particles[i].update();
-                if (particles[i].life <= 0) {
-                    particles[i] = new CyberParticle();
-                }
-            }
-
-            requestAnimationFrame(animate);
-        }
-
-        window.onload = function() {
-            animate();
-        };
-    </script>
-</body>
-</html>
+<!-- ... existing code -->
