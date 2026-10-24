@@ -14,14 +14,13 @@
                     colors: {
                         cyber: {
                             bg: '#04060c',
-                            card: 'rgba(11, 15, 28, 0.72)',
-                            border: 'rgba(0, 240, 255, 0.2)',
-                            borderHover: 'rgba(0, 240, 255, 0.6)',
+                            card: 'rgba(11, 15, 28, 0.75)',
+                            border: 'rgba(0, 240, 255, 0.25)',
                             cyan: '#00f0ff',
                             purple: '#a855f7',
-                            pink: '#ec4899',
+                            emerald: '#10b981',
                             yellow: '#facc15',
-                            emerald: '#10b981'
+                            discord: '#5865F2'
                         }
                     },
                     fontFamily: {
@@ -31,8 +30,6 @@
                     animation: {
                         'glow-pulse': 'glowPulse 2.5s infinite alternate',
                         'electric-shift': 'electricShift 4s ease infinite',
-                        'float-slow': 'floatSlow 6s ease-in-out infinite',
-                        'radar-spin': 'radarSpin 8s linear infinite',
                     },
                     keyframes: {
                         glowPulse: {
@@ -42,24 +39,16 @@
                         electricShift: {
                             '0%, 100%': { backgroundPosition: '0% 50%' },
                             '50%': { backgroundPosition: '100% 50%' }
-                        },
-                        floatSlow: {
-                            '0%, 100%': { transform: 'translateY(0px)' },
-                            '50%': { transform: 'translateY(-6px)' }
-                        },
-                        radarSpin: {
-                            '0%': { transform: 'rotate(0deg)' },
-                            '100%': { transform: 'rotate(360deg)' }
                         }
                     }
                 }
             }
         }
     </script>
-    <!-- Google Fonts: Orbitron & Inter -->
+    <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Orbitron:wght@600;800;900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Orbitron:wght@600;700;800;900&display=swap" rel="stylesheet">
     <!-- FontAwesome Icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
@@ -86,40 +75,30 @@
             z-index: 1;
         }
 
-        /* Ambient Plasma Glow Behind Main Card */
+        /* Ambient Glow */
         .plasma-glow {
-            position: absolute;
-            width: 600px;
-            height: 600px;
-            background: radial-gradient(circle, rgba(0, 240, 255, 0.12) 0%, rgba(168, 85, 247, 0.08) 40%, rgba(0, 0, 0, 0) 70%);
-            top: 50%;
+            position: fixed;
+            width: 650px;
+            height: 650px;
+            background: radial-gradient(circle, rgba(0, 240, 255, 0.12) 0%, rgba(168, 85, 247, 0.08) 45%, rgba(0, 0, 0, 0) 70%);
+            top: 30%;
             left: 50%;
-            transform: translate(-50%, -50%);
+            transform: translate(-50%, -30%);
             pointer-events: none;
             z-index: 2;
-            filter: blur(50px);
+            filter: blur(60px);
         }
 
         /* Glassmorphism Styling */
         .glass-panel {
-            background: rgba(11, 15, 28, 0.72);
-            backdrop-filter: blur(16px);
-            -webkit-backdrop-filter: blur(16px);
-            border: 1px solid rgba(0, 240, 255, 0.18);
-            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.7), inset 0 1px 0 rgba(255, 255, 255, 0.05);
+            background: rgba(11, 15, 28, 0.82);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border: 1px solid rgba(0, 240, 255, 0.2);
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.8), inset 0 1px 0 rgba(255, 255, 255, 0.08);
         }
 
-        .glass-panel-hover {
-            transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
-        }
-
-        .glass-panel-hover:hover {
-            border-color: rgba(0, 240, 255, 0.5);
-            box-shadow: 0 0 30px rgba(0, 240, 255, 0.25), inset 0 1px 0 rgba(255, 255, 255, 0.1);
-            transform: translateY(-2px);
-        }
-
-        /* Cyber Electric CTA Button */
+        /* Cyber CTA Button */
         .btn-cyber {
             background: linear-gradient(135deg, #00f0ff 0%, #7c3aed 50%, #ec4899 100%);
             background-size: 200% 200%;
@@ -130,516 +109,510 @@
 
         .btn-cyber:hover {
             box-shadow: 0 0 45px rgba(0, 240, 255, 0.7), 0 0 20px rgba(168, 85, 247, 0.5);
-            transform: translateY(-2px) scale(1.01);
+            transform: translateY(-2px);
         }
 
-        /* Modal Overlay Blur */
-        .modal-backdrop {
-            backdrop-filter: blur(14px);
-            -webkit-backdrop-filter: blur(14px);
+        .btn-discord {
+            background: linear-gradient(135deg, #5865F2 0%, #404EED 100%);
+            box-shadow: 0 0 20px rgba(88, 101, 242, 0.4);
+            transition: all 0.3s ease;
         }
 
-        /* Custom Scrollbars */
-        ::-webkit-scrollbar {
-            width: 8px;
+        .btn-discord:hover {
+            box-shadow: 0 0 35px rgba(88, 101, 242, 0.8);
+            transform: translateY(-2px);
         }
-        ::-webkit-scrollbar-track {
-            background: #04060c;
+
+        .custom-scrollbar::-webkit-scrollbar {
+            width: 6px;
         }
-        ::-webkit-scrollbar-thumb {
-            background: #1e293b;
-            border-radius: 4px;
-            border: 1px solid rgba(0, 240, 255, 0.2);
+        .custom-scrollbar::-webkit-scrollbar-track {
+            background: rgba(15, 23, 42, 0.6);
         }
-        ::-webkit-scrollbar-thumb:hover {
+        .custom-scrollbar::-webkit-scrollbar-thumb {
             background: #00f0ff;
+            border-radius: 4px;
         }
     </style>
 </head>
 <body class="min-h-screen flex flex-col justify-between relative selection:bg-cyber-cyan selection:text-black">
 
-    <!-- Canvas Animation Background -->
+    <!-- Electric Lightning Canvas -->
     <canvas id="cyberCanvas"></canvas>
 
-    <!-- Background Ambient Glow -->
+    <!-- Plasma Glow Layer -->
     <div class="plasma-glow"></div>
 
-    <!-- Top Navigation Header -->
-    <header class="relative z-10 border-b border-cyan-900/40 glass-panel px-6 py-4">
-        <div class="max-w-6xl mx-auto flex items-center justify-between flex-wrap gap-4">
+    <!-- Header Navigation -->
+    <header class="relative z-10 border-b border-cyan-900/40 glass-panel px-4 sm:px-8 py-4 sticky top-0">
+        <div class="max-w-7xl mx-auto flex items-center justify-between">
             
-            <!-- Logo Section -->
-            <div class="flex items-center space-x-3.5">
-                <div class="w-11 h-11 rounded-xl bg-gradient-to-tr from-cyan-500 via-indigo-600 to-purple-600 flex items-center justify-center font-black text-xl text-white shadow-lg shadow-cyan-500/30 border border-cyan-300/40 relative group">
+            <!-- Logo & Title -->
+            <div class="flex items-center space-x-3">
+                <div class="w-10 h-10 rounded-xl bg-gradient-to-tr from-cyan-500 via-indigo-600 to-purple-600 flex items-center justify-center text-white font-black shadow-lg shadow-cyan-500/30 border border-cyan-300/40">
                     <i class="fa-solid fa-bolt-lightning text-yellow-300 animate-pulse"></i>
-                    <div class="absolute -inset-1 bg-cyan-500 rounded-xl blur opacity-30 group-hover:opacity-60 transition duration-300"></div>
                 </div>
                 <div>
-                    <span class="font-display font-extrabold text-xl md:text-2xl tracking-wider text-white flex items-center gap-2">
-                        RIVALS HUB
-                        <span class="px-2 py-0.5 text-[9px] font-sans font-bold bg-cyan-500/20 text-cyber-cyan border border-cyan-400/30 rounded-full tracking-normal">ULTRA</span>
-                    </span>
-                    <span class="text-[11px] text-cyber-cyan block font-mono font-semibold tracking-widest uppercase opacity-90">Best Rivals Script</span>
+                    <span class="font-display font-extrabold text-xl tracking-wider text-white">RIVALS HUB</span>
+                    <span class="text-[10px] text-cyber-cyan block font-mono uppercase tracking-widest">Ultimate Execution Suite</span>
                 </div>
             </div>
-            
-            <!-- Top Right: Script Status Toggle Button -->
-            <div class="flex items-center space-x-3">
+
+            <!-- Top Right Action Buttons -->
+            <div class="flex items-center gap-2 sm:gap-3">
+                <!-- Status Badge Button -->
                 <button 
-                    onclick="openStatusModal()" 
-                    class="inline-flex items-center px-4 py-2 rounded-xl text-xs font-semibold bg-slate-900/90 text-white border border-cyan-500/40 hover:border-cyan-400 transition-all cursor-pointer shadow-lg hover:shadow-cyan-500/20 group">
-                    <span class="w-2.5 h-2.5 rounded-full bg-emerald-400 mr-2 animate-pulse"></span>
-                    <span class="mr-2 group-hover:text-cyan-300 transition-colors">Script Status</span>
-                    <i class="fa-solid fa-sliders text-cyber-cyan text-sm"></i>
+                    onclick="toggleModal('statusModal')"
+                    class="px-3 py-1.5 rounded-xl bg-emerald-500/10 border border-emerald-400/40 text-emerald-400 text-xs font-mono font-bold flex items-center gap-2 hover:bg-emerald-500/20 transition-all cursor-pointer">
+                    <span class="w-2.5 h-2.5 rounded-full bg-emerald-400 animate-ping"></span>
+                    <span class="hidden sm:inline">Status:</span> 🟢 Safe (Undetected)
+                    <i class="fa-solid fa-circle-info text-[10px] opacity-70"></i>
                 </button>
+
+                <!-- Discord Top Button (NEW) -->
+                <a 
+                    href="https://discord.gg/FXkppbKqr" 
+                    target="_blank" 
+                    rel="noopener noreferrer" 
+                    class="btn-discord px-3.5 py-1.5 rounded-xl text-white text-xs font-display font-bold flex items-center gap-2 cursor-pointer shadow-lg">
+                    <i class="fa-brands fa-discord text-base"></i>
+                    <span class="hidden md:inline">Discord</span>
+                </a>
+
+                <!-- Version Badge -->
+                <div class="px-3 py-1.5 rounded-xl bg-purple-500/10 border border-purple-400/30 text-purple-300 text-xs font-mono font-semibold hidden lg:flex items-center gap-1.5">
+                    <i class="fa-solid fa-code-branch text-purple-400"></i>
+                    <span>V0.9.5e</span>
+                </div>
             </div>
+
         </div>
     </header>
 
     <!-- Main Content Container -->
-    <main class="relative z-10 max-w-6xl mx-auto px-4 py-8 md:py-12 flex-grow flex items-center justify-center">
-        <div class="w-full grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
-            
-            <!-- Left Side: Full Image Frame & Script Features -->
-            <div class="lg:col-span-7 space-y-6">
-                
-                <!-- FULL IMAGE DISPLAY CONTAINER -->
-                <div class="glass-panel rounded-2xl p-3 md:p-4 border border-cyan-500/30 relative overflow-hidden group">
-                    
-                    <!-- Decorative Corner Tech Accents -->
-                    <div class="absolute top-2 left-2 w-3 h-3 border-t-2 border-l-2 border-cyan-400 z-10"></div>
-                    <div class="absolute top-2 right-2 w-3 h-3 border-t-2 border-r-2 border-cyan-400 z-10"></div>
-                    <div class="absolute bottom-2 left-2 w-3 h-3 border-b-2 border-l-2 border-cyan-400 z-10"></div>
-                    <div class="absolute bottom-2 right-2 w-3 h-3 border-b-2 border-r-2 border-cyan-400 z-10"></div>
+    <main class="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 py-8 sm:py-12 flex-grow w-full space-y-10">
 
-                    <!-- Inner Frame for Image with 100% full view -->
-                    <div class="relative w-full flex items-center justify-center bg-black/70 rounded-xl overflow-hidden p-2 min-h-[280px] sm:min-h-[360px] border border-slate-800/80">
-                        
-                        <!-- Main Product Showcase Image -->
-                        <img 
-                            id="productImage"
-                            src="https://cdn.discordapp.com/attachments/1545735160970874951/1563497327539519610/image.png?ex=6addd7db&is=6adc865b&hm=9a7ea4accfcf7d410e1bb2077f70b53137dce9a6d0a1832933b7df35b2be2540&" 
-                            alt="Best Rivals Script Full Preview" 
-                            class="max-w-full max-h-[500px] w-auto h-auto object-contain rounded-lg shadow-2xl transition-transform duration-500 group-hover:scale-[1.015] cursor-pointer"
-                            onclick="openImageLightbox()"
-                            onerror="this.style.display='none'; document.getElementById('imageFallback').classList.remove('hidden');"
-                        />
-                        
-                        <!-- Image Fallback Display -->
-                        <div id="imageFallback" class="hidden w-full py-20 flex flex-col items-center justify-center p-6 text-center bg-gradient-to-br from-indigo-950/80 via-slate-950 to-black">
-                            <div class="w-16 h-16 rounded-2xl bg-cyan-500/20 border border-cyan-400/50 flex items-center justify-center mb-3 shadow-lg shadow-cyan-500/30">
-                                <i class="fa-solid fa-shield-halved text-3xl text-cyan-400"></i>
-                            </div>
-                            <h4 class="font-display text-xl font-bold text-white">BEST RIVALS SCRIPT</h4>
-                            <p class="text-xs text-cyber-cyan mt-1 font-mono">v0.9.5e • 100% Safe & Undetected</p>
-                        </div>
+        <!-- Hero Title Banner -->
+        <div class="text-center space-y-3">
+            <div class="inline-flex items-center gap-2 px-4 py-1 rounded-full bg-cyan-950/80 border border-cyan-500/40 text-cyber-cyan text-xs font-mono font-semibold tracking-wider uppercase mb-2">
+                <i class="fa-solid fa-fire text-yellow-400"></i>
+                <span>BEST RIVALS SCRIPT - PREMIUM RELEASE</span>
+            </div>
+            <h1 class="font-display text-3xl sm:text-5xl lg:text-6xl font-black text-white tracking-tight uppercase">
+                DOMINATE WITH <span class="bg-gradient-to-r from-cyan-400 via-purple-400 to-pink-500 bg-clip-text text-transparent">RIVALS HUB</span>
+            </h1>
+            <p class="text-sm sm:text-base text-gray-300 max-w-2xl mx-auto font-light">
+                Unmatched precision, advanced protection, and full customization tailored specifically for Rivals.
+            </p>
+        </div>
 
-                        <!-- Hover Overlay Lightbox Trigger -->
-                        <div onclick="openImageLightbox()" class="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center cursor-pointer pointer-events-auto">
-                            <span class="px-4 py-2 rounded-xl bg-slate-900/90 text-white font-mono text-xs border border-cyan-400/50 flex items-center gap-2 shadow-2xl">
-                                <i class="fa-solid fa-expand text-cyber-cyan"></i> Click to View Fullscreen
-                            </span>
-                        </div>
+        <!-- Main Product Card Grid -->
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
 
-                        <!-- Top Floating Badge -->
-                        <div class="absolute top-4 left-4 bg-slate-950/85 backdrop-blur-md px-3 py-1.5 rounded-lg border border-cyan-500/40 text-[11px] font-semibold text-white flex items-center gap-2 shadow-lg">
-                            <i class="fa-solid fa-bolt-lightning text-yellow-400 animate-pulse"></i>
-                            <span>100% Full Showcase</span>
-                        </div>
+            <!-- Image Showcase Panel (Left 7 Cols) -->
+            <div class="lg:col-span-7 glass-panel rounded-3xl p-4 sm:p-6 relative overflow-hidden border border-cyan-500/40">
+                <div class="flex items-center justify-between mb-4 border-b border-cyan-900/50 pb-3">
+                    <div class="flex items-center gap-2">
+                        <i class="fa-regular fa-image text-cyber-cyan"></i>
+                        <span class="font-display text-sm font-bold tracking-wider text-white">HUB INTERFACE PREVIEW</span>
                     </div>
+                    <span class="text-[10px] font-mono text-emerald-400 bg-emerald-950/60 border border-emerald-500/30 px-2 py-0.5 rounded">
+                        100% VISIBILITY
+                    </span>
                 </div>
 
-                <!-- Script Features Grid -->
-                <div class="glass-panel rounded-2xl p-5 border border-cyan-900/40">
-                    <h3 class="text-xs font-display uppercase tracking-widest font-extrabold text-cyber-cyan mb-4 flex items-center gap-2">
-                        <i class="fa-solid fa-cubes text-purple-400"></i> Feature Execution Suite
-                    </h3>
-                    <div class="grid grid-cols-2 sm:grid-cols-3 gap-3">
-                        <div class="glass-panel-hover flex items-center space-x-2.5 bg-slate-950/70 border border-slate-800 rounded-xl p-3 text-xs font-semibold text-gray-200">
-                            <i class="fa-solid fa-crosshairs text-red-400 text-sm"></i>
-                            <span>Silent Aim</span>
+                <!-- Product Preview Image Frame -->
+                <div class="relative w-full rounded-2xl overflow-hidden bg-slate-950 border border-cyan-500/30 flex items-center justify-center p-2 min-h-[320px] sm:min-h-[420px] group">
+                    <img 
+                        src="https://cdn.discordapp.com/attachments/1545735160970874951/1563497327539519610/image.png?ex=6addd7db&is=6adc865b&hm=9a7ea4accfcf7d410e1bb2077f70b53137dce9a6d0a1832933b7df35b2be2540&hm=9a7ea4accfcf7d410e1bb2077f70b53137dce9a6d0a1832933b7df35b2be2540&" 
+                        alt="Rivals Hub Interface Preview"
+                        class="w-full h-auto max-h-[500px] object-contain rounded-xl shadow-2xl transition-transform duration-500 group-hover:scale-[1.01]"
+                        onerror="this.onerror=null; this.src='https://placehold.co/800x500/0b0f1c/00f0ff?text=RIVALS+HUB+PREVIEW';"
+                    />
+                </div>
+            </div>
+
+            <!-- Details & Purchase Sidebar (Right 5 Cols) -->
+            <div class="lg:col-span-5 space-y-6">
+
+                <!-- Development & Pricing Card -->
+                <div class="glass-panel rounded-3xl p-6 border border-cyan-500/40 space-y-5">
+                    <div class="flex items-center justify-between border-b border-cyan-900/50 pb-3">
+                        <h2 class="font-display font-extrabold text-lg text-white">DEVELOPMENT DETAILS</h2>
+                        <span class="text-xs font-mono text-cyan-400 bg-cyan-950/60 border border-cyan-500/30 px-2.5 py-1 rounded-full">
+                            Instant Access
+                        </span>
+                    </div>
+
+                    <!-- Stats Grid -->
+                    <div class="grid grid-cols-2 gap-3 font-mono text-xs">
+                        <!-- Dev Time -->
+                        <div class="p-3 bg-slate-950/80 rounded-2xl border border-slate-800">
+                            <span class="text-gray-400 text-[10px] block uppercase">Dev Time</span>
+                            <span class="text-sm font-bold text-cyber-cyan flex items-center gap-1 mt-0.5">
+                                <i class="fa-solid fa-clock text-yellow-400"></i> ~6 Months
+                            </span>
                         </div>
-                        <div class="glass-panel-hover flex items-center space-x-2.5 bg-slate-950/70 border border-slate-800 rounded-xl p-3 text-xs font-semibold text-gray-200">
-                            <i class="fa-solid fa-mobile-screen-button text-blue-400 text-sm"></i>
-                            <span>Device Spoof</span>
+                        <!-- Active Users -->
+                        <div class="p-3 bg-slate-950/80 rounded-2xl border border-slate-800">
+                            <span class="text-gray-400 text-[10px] block uppercase">Active Users</span>
+                            <span class="text-sm font-bold text-emerald-400 flex items-center gap-1 mt-0.5">
+                                <i class="fa-solid fa-users text-emerald-400"></i> 2 Users
+                            </span>
                         </div>
-                        <div class="glass-panel-hover flex items-center space-x-2.5 bg-slate-950/70 border border-slate-800 rounded-xl p-3 text-xs font-semibold text-gray-200">
-                            <i class="fa-solid fa-skull text-purple-400 text-sm"></i>
-                            <span>Ragebot</span>
+                        <!-- Stock Status -->
+                        <div class="p-3 bg-slate-950/80 rounded-2xl border border-slate-800">
+                            <span class="text-gray-400 text-[10px] block uppercase">Stock Level</span>
+                            <span class="text-sm font-bold text-rose-400 flex items-center gap-1 mt-0.5">
+                                <i class="fa-solid fa-box text-rose-400"></i> 1 Unit Left
+                            </span>
                         </div>
-                        <div class="glass-panel-hover flex items-center space-x-2.5 bg-slate-950/70 border border-slate-800 rounded-xl p-3 text-xs font-semibold text-gray-200">
-                            <i class="fa-solid fa-shield-halved text-emerald-400 text-sm"></i>
-                            <span>HvH</span>
-                        </div>
-                        <div class="glass-panel-hover flex items-center space-x-2.5 bg-slate-950/70 border border-slate-800 rounded-xl p-3 text-xs font-semibold text-gray-200">
-                            <i class="fa-solid fa-gun text-amber-400 text-sm"></i>
-                            <span>Aimbot</span>
-                        </div>
-                        <div class="glass-panel-hover flex items-center space-x-2.5 bg-slate-950/70 border border-slate-800 rounded-xl p-3 text-xs font-semibold text-gray-200">
-                            <i class="fa-solid fa-user-ninja text-indigo-400 text-sm"></i>
-                            <span>General Spoofing</span>
+                        <!-- Price -->
+                        <div class="p-3 bg-slate-950/80 rounded-2xl border border-slate-800">
+                            <span class="text-gray-400 text-[10px] block uppercase">Price</span>
+                            <span class="text-sm font-bold text-yellow-300 flex items-center gap-1 mt-0.5">
+                                <i class="fa-solid fa-coins text-yellow-400"></i> 70 Robux
+                            </span>
                         </div>
                     </div>
+
+                    <!-- CTA Purchase Button -->
+                    <button 
+                        onclick="toggleModal('purchaseModal')" 
+                        class="w-full py-4 px-6 rounded-2xl font-display font-black text-sm uppercase tracking-wider btn-cyber text-white flex items-center justify-center gap-3 cursor-pointer shadow-xl">
+                        <i class="fa-solid fa-cart-shopping text-base"></i>
+                        <span>Purchase Key (70 Robux)</span>
+                    </button>
+
+                    <!-- Discord Direct Link Button -->
+                    <a 
+                        href="https://discord.gg/FXkppbKqr" 
+                        target="_blank" 
+                        rel="noopener noreferrer" 
+                        class="w-full py-3.5 px-6 rounded-2xl font-display font-extrabold text-xs uppercase tracking-wider btn-discord text-white flex items-center justify-center gap-2 cursor-pointer">
+                        <i class="fa-brands fa-discord text-lg"></i>
+                        <span>Join Discord Community</span>
+                    </a>
                 </div>
 
             </div>
+        </div>
 
-            <!-- Right Side: Details & Buy CTA Card -->
-            <div class="lg:col-span-5 space-y-6">
-                <div class="glass-panel rounded-2xl p-6 md:p-8 border border-cyan-500/30 relative overflow-hidden">
-                    
-                    <!-- Title Header -->
-                    <div class="mb-5">
-                        <div class="flex items-center gap-2 mb-2">
-                            <span class="px-2.5 py-0.5 rounded-full bg-cyan-500/20 text-cyber-cyan text-[10px] font-mono font-extrabold uppercase tracking-widest border border-cyan-400/30">
-                                Verified Hub Key
-                            </span>
-                        </div>
-                        <h1 class="font-display text-2xl md:text-3xl font-black tracking-tight text-white">
-                            BEST RIVALS SCRIPT
-                        </h1>
-                        <p class="text-gray-400 text-xs mt-1.5">Unmatched performance, stealth bypass, and premier Rivals execution.</p>
+        <!-- Feature Execution Suite Section -->
+        <div class="glass-panel rounded-3xl p-6 sm:p-8 border border-cyan-500/40 space-y-6">
+            <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3 border-b border-cyan-900/50 pb-4">
+                <div>
+                    <h2 class="font-display text-xl sm:text-2xl font-extrabold text-white flex items-center gap-2">
+                        <i class="fa-solid fa-microchip text-cyber-cyan"></i> FEATURE EXECUTION SUITE
+                    </h2>
+                    <p class="text-xs text-gray-400 mt-1">Loaded with premium modules optimized for flawless gameplay.</p>
+                </div>
+                <span class="self-start sm:self-auto text-xs font-mono bg-purple-950/80 text-purple-300 px-3 py-1 rounded-full border border-purple-500/40">
+                    10 Active Modules
+                </span>
+            </div>
+
+            <!-- Features Grid (Including new requested features: ESP, Skybox Changer, Fast Shot, No Spread) -->
+            <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-3 sm:gap-4">
+                
+                <!-- Silent Aim -->
+                <div class="p-4 bg-slate-950/70 rounded-2xl border border-cyan-500/20 hover:border-cyan-400 transition-all group">
+                    <div class="w-8 h-8 rounded-lg bg-cyan-500/20 text-cyber-cyan flex items-center justify-center mb-2 group-hover:scale-110 transition-transform">
+                        <i class="fa-solid fa-crosshair"></i>
+                    </div>
+                    <div class="font-display text-xs font-bold text-white">Silent Aim</div>
+                    <p class="text-[10px] text-gray-400 mt-0.5">Unseen targeting assist</p>
+                </div>
+
+                <!-- Device Spoof -->
+                <div class="p-4 bg-slate-950/70 rounded-2xl border border-cyan-500/20 hover:border-cyan-400 transition-all group">
+                    <div class="w-8 h-8 rounded-lg bg-purple-500/20 text-purple-400 flex items-center justify-center mb-2 group-hover:scale-110 transition-transform">
+                        <i class="fa-solid fa-mobile-screen-button"></i>
+                    </div>
+                    <div class="font-display text-xs font-bold text-white">Device Spoof</div>
+                    <p class="text-[10px] text-gray-400 mt-0.5">Emulate target hardware</p>
+                </div>
+
+                <!-- Ragebot -->
+                <div class="p-4 bg-slate-950/70 rounded-2xl border border-cyan-500/20 hover:border-cyan-400 transition-all group">
+                    <div class="w-8 h-8 rounded-lg bg-rose-500/20 text-rose-400 flex items-center justify-center mb-2 group-hover:scale-110 transition-transform">
+                        <i class="fa-solid fa-skull"></i>
+                    </div>
+                    <div class="font-display text-xs font-bold text-white">Ragebot</div>
+                    <p class="text-[10px] text-gray-400 mt-0.5">Maximum aggression bot</p>
+                </div>
+
+                <!-- HvH -->
+                <div class="p-4 bg-slate-950/70 rounded-2xl border border-cyan-500/20 hover:border-cyan-400 transition-all group">
+                    <div class="w-8 h-8 rounded-lg bg-yellow-500/20 text-yellow-400 flex items-center justify-center mb-2 group-hover:scale-110 transition-transform">
+                        <i class="fa-solid fa-shield-halved"></i>
+                    </div>
+                    <div class="font-display text-xs font-bold text-white">HvH</div>
+                    <p class="text-[10px] text-gray-400 mt-0.5">Hacker vs Hacker mode</p>
+                </div>
+
+                <!-- Aimbot -->
+                <div class="p-4 bg-slate-950/70 rounded-2xl border border-cyan-500/20 hover:border-cyan-400 transition-all group">
+                    <div class="w-8 h-8 rounded-lg bg-emerald-500/20 text-emerald-400 flex items-center justify-center mb-2 group-hover:scale-110 transition-transform">
+                        <i class="fa-solid fa-bullseye"></i>
+                    </div>
+                    <div class="font-display text-xs font-bold text-white">Aimbot</div>
+                    <p class="text-[10px] text-gray-400 mt-0.5">Custom lock & smooth</p>
+                </div>
+
+                <!-- General Spoofing -->
+                <div class="p-4 bg-slate-950/70 rounded-2xl border border-cyan-500/20 hover:border-cyan-400 transition-all group">
+                    <div class="w-8 h-8 rounded-lg bg-indigo-500/20 text-indigo-400 flex items-center justify-center mb-2 group-hover:scale-110 transition-transform">
+                        <i class="fa-solid fa-user-secret"></i>
+                    </div>
+                    <div class="font-display text-xs font-bold text-white">General Spoofing</div>
+                    <p class="text-[10px] text-gray-400 mt-0.5">Identity obfuscation</p>
+                </div>
+
+                <!-- ESP (NEW) -->
+                <div class="p-4 bg-slate-950/70 rounded-2xl border border-cyan-500/20 hover:border-cyan-400 transition-all group">
+                    <div class="w-8 h-8 rounded-lg bg-cyan-500/20 text-cyber-cyan flex items-center justify-center mb-2 group-hover:scale-110 transition-transform">
+                        <i class="fa-solid fa-eye"></i>
+                    </div>
+                    <div class="font-display text-xs font-bold text-white">ESP</div>
+                    <p class="text-[10px] text-gray-400 mt-0.5">Wallhack & info visualizer</p>
+                </div>
+
+                <!-- Skybox Changer (NEW) -->
+                <div class="p-4 bg-slate-950/70 rounded-2xl border border-cyan-500/20 hover:border-cyan-400 transition-all group">
+                    <div class="w-8 h-8 rounded-lg bg-amber-500/20 text-amber-400 flex items-center justify-center mb-2 group-hover:scale-110 transition-transform">
+                        <i class="fa-solid fa-cloud-moon"></i>
+                    </div>
+                    <div class="font-display text-xs font-bold text-white">Skybox Changer</div>
+                    <p class="text-[10px] text-gray-400 mt-0.5">Custom map atmosphere</p>
+                </div>
+
+                <!-- Fast Shot (NEW) -->
+                <div class="p-4 bg-slate-950/70 rounded-2xl border border-cyan-500/20 hover:border-cyan-400 transition-all group">
+                    <div class="w-8 h-8 rounded-lg bg-pink-500/20 text-pink-400 flex items-center justify-center mb-2 group-hover:scale-110 transition-transform">
+                        <i class="fa-solid fa-bolt"></i>
+                    </div>
+                    <div class="font-display text-xs font-bold text-white">Fast Shot</div>
+                    <p class="text-[10px] text-gray-400 mt-0.5">Accelerated fire rate</p>
+                </div>
+
+                <!-- No Spread (NEW) -->
+                <div class="p-4 bg-slate-950/70 rounded-2xl border border-cyan-500/20 hover:border-cyan-400 transition-all group">
+                    <div class="w-8 h-8 rounded-lg bg-teal-500/20 text-teal-300 flex items-center justify-center mb-2 group-hover:scale-110 transition-transform">
+                        <i class="fa-solid fa-arrows-to-dot"></i>
+                    </div>
+                    <div class="font-display text-xs font-bold text-white">No Spread</div>
+                    <p class="text-[10px] text-gray-400 mt-0.5">100% bullet trajectory pin</p>
+                </div>
+
+            </div>
+        </div>
+
+    </main>
+
+    <!-- Footer -->
+    <footer class="relative z-10 border-t border-slate-900 py-6 text-center text-xs text-gray-500 glass-panel">
+        <div class="max-w-7xl mx-auto px-4 flex flex-col sm:flex-row items-center justify-between gap-3">
+            <p>© 2026 RIVALS HUB. All rights reserved.</p>
+            <div class="flex items-center gap-4 text-gray-400">
+                <a href="https://discord.gg/FXkppbKqr" target="_blank" class="hover:text-cyber-cyan transition-colors">Discord Server</a>
+                <span>•</span>
+                <button onclick="toggleModal('statusModal')" class="hover:text-emerald-400 transition-colors">Script Status Legend</button>
+            </div>
+        </div>
+    </footer>
+
+    <!-- MODAL 1: Status Legend Modal -->
+    <div id="statusModal" class="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/80 backdrop-blur-md hidden">
+        <div class="w-full max-w-md glass-panel rounded-3xl p-6 border border-cyan-500/40 relative shadow-2xl">
+            <button onclick="toggleModal('statusModal')" class="absolute top-4 right-4 text-gray-400 hover:text-white text-lg">
+                <i class="fa-solid fa-xmark"></i>
+            </button>
+            <h3 class="font-display text-lg font-bold text-white mb-4 flex items-center gap-2">
+                <i class="fa-solid fa-list-check text-cyber-cyan"></i> Script Status Legend
+            </h3>
+            <div class="space-y-3 font-mono text-xs">
+                <div class="p-3 bg-slate-950/80 rounded-xl border border-slate-800 flex items-center gap-3">
+                    <span class="text-lg">🟢</span>
+                    <div>
+                        <div class="font-bold text-emerald-400">Safe (Undetected)</div>
+                        <div class="text-[10px] text-gray-400">Fully operational & tested safe</div>
+                    </div>
+                </div>
+                <div class="p-3 bg-slate-950/80 rounded-xl border border-slate-800 flex items-center gap-3">
+                    <span class="text-lg">🟡</span>
+                    <div>
+                        <div class="font-bold text-yellow-400">Use at your own risk</div>
+                        <div class="text-[10px] text-gray-400">Game updated, exercise caution</div>
+                    </div>
+                </div>
+                <div class="p-3 bg-slate-950/80 rounded-xl border border-slate-800 flex items-center gap-3">
+                    <span class="text-lg">🔴</span>
+                    <div>
+                        <div class="font-bold text-rose-400">Down or Detected</div>
+                        <div class="text-[10px] text-gray-400">Currently offline for safety</div>
+                    </div>
+                </div>
+                <div class="p-3 bg-slate-950/80 rounded-xl border border-slate-800 flex items-center gap-3">
+                    <span class="text-lg">🟣</span>
+                    <div>
+                        <div class="font-bold text-purple-400">Development</div>
+                        <div class="text-[10px] text-gray-400">New features being added</div>
+                    </div>
+                </div>
+                <div class="p-3 bg-slate-950/80 rounded-xl border border-slate-800 flex items-center gap-3">
+                    <span class="text-lg">🖤</span>
+                    <div>
+                        <div class="font-bold text-gray-400">Test (down)</div>
+                        <div class="text-[10px] text-gray-400">Internal build testing</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- MODAL 2: Purchase & Payment Step Modal -->
+    <div id="purchaseModal" class="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/85 backdrop-blur-md hidden">
+        <div class="w-full max-w-lg glass-panel rounded-3xl p-6 sm:p-8 border border-cyan-500/40 relative shadow-2xl">
+            <button onclick="toggleModal('purchaseModal')" class="absolute top-4 right-4 text-gray-400 hover:text-white text-lg">
+                <i class="fa-solid fa-xmark"></i>
+            </button>
+
+            <!-- Step 1: Discord Info & Option Selection -->
+            <div id="step1">
+                <div class="flex items-center gap-2 mb-4">
+                    <span class="px-2.5 py-0.5 rounded-full bg-cyan-500/20 text-cyber-cyan text-xs font-mono font-bold">Step 1 / 2</span>
+                    <h3 class="font-display text-lg font-bold text-white">Robux Order Request</h3>
+                </div>
+
+                <p class="text-xs text-gray-300 mb-5">
+                    Please provide your Discord username or ID so our team can verify your payment and grant your key.
+                </p>
+
+                <div class="space-y-4 mb-6">
+                    <div>
+                        <label class="block text-xs font-mono uppercase text-gray-400 mb-1.5">Discord Username or ID</label>
+                        <input 
+                            type="text" 
+                            id="discordUser"
+                            placeholder="e.g. user#1234 or discord_user" 
+                            class="w-full px-4 py-3 bg-slate-950 rounded-xl border border-slate-800 focus:border-cyber-cyan text-white text-sm outline-none transition-colors"
+                        />
                     </div>
 
-                    <!-- Current Script Status Indicator -->
-                    <div class="mb-5 p-4 rounded-xl bg-slate-950/90 border border-slate-800">
-                        <div class="flex items-center justify-between mb-2">
-                            <span class="text-[11px] text-gray-400 font-extrabold uppercase tracking-wider font-mono">Current Status</span>
-                            <button onclick="openStatusModal()" class="text-xs text-cyber-cyan hover:underline flex items-center gap-1 font-semibold">
-                                <span>Legend</span>
-                                <i class="fa-solid fa-circle-question text-[11px]"></i>
+                    <div class="p-4 bg-slate-950/80 rounded-xl border border-cyan-500/30 flex items-center justify-between">
+                        <div>
+                            <span class="text-xs text-gray-400 block font-mono">Price</span>
+                            <span class="text-base font-bold text-yellow-300 font-mono">70 Robux</span>
+                        </div>
+                        <span class="text-[11px] font-mono bg-emerald-500/20 text-emerald-300 border border-emerald-500/30 px-2.5 py-1 rounded-full">
+                            1 Unit Left
+                        </span>
+                    </div>
+                </div>
+
+                <button 
+                    onclick="goToStep2()" 
+                    class="w-full py-3.5 px-6 rounded-xl font-display font-bold text-xs uppercase tracking-wider btn-cyber text-white flex items-center justify-center gap-2 cursor-pointer">
+                    <span>Proceed to Payment Instructions</span>
+                    <i class="fa-solid fa-arrow-right"></i>
+                </button>
+            </div>
+
+            <!-- Step 2: Robux Payment Instructions -->
+            <div id="step2" class="hidden">
+                <div class="flex items-center gap-2 mb-4">
+                    <span class="px-2.5 py-0.5 rounded-full bg-purple-500/20 text-purple-300 text-xs font-mono font-bold">Step 2 / 2</span>
+                    <h3 class="font-display text-lg font-bold text-white">Payment Instructions</h3>
+                </div>
+
+                <div class="p-4 bg-slate-950/90 rounded-2xl border border-cyan-500/40 space-y-3 mb-6 text-xs text-gray-300">
+                    <div class="flex gap-2">
+                        <span class="font-mono text-cyber-cyan font-bold">1.</span>
+                        <p>
+                            Send <strong class="text-yellow-300 font-mono">70 Robux</strong> to Roblox Username: 
+                            <span class="bg-black/80 px-2 py-0.5 rounded text-cyber-cyan font-mono font-bold select-all inline-block border border-slate-800">koyohwan2e</span>
+                            <button onclick="copyText('koyohwan2e', this)" class="ml-1 text-xs text-cyan-400 hover:underline">
+                                <i class="fa-regular fa-copy"></i> Copy
                             </button>
-                        </div>
-                        <div class="flex items-center space-x-2.5 text-sm font-bold text-emerald-400 mb-1">
-                            <span class="text-base animate-pulse">🟢</span>
-                            <span class="tracking-wide">Safe (undetected)</span>
-                        </div>
-                        <div class="text-xs font-mono text-gray-400">
-                            Version: <span class="text-cyan-300 font-semibold">V0.9.5e</span>
-                        </div>
+                        </p>
                     </div>
 
-                    <!-- Specifications Breakdown -->
-                    <div class="space-y-2.5 mb-6">
-                        <!-- Development Time -->
-                        <div class="flex items-center justify-between p-3 rounded-xl bg-slate-950/60 border border-slate-800/80">
-                            <div class="flex items-center space-x-3 text-gray-300">
-                                <div class="w-8 h-8 rounded-lg bg-indigo-500/20 border border-indigo-500/30 flex items-center justify-center text-indigo-400 text-xs">
-                                    <i class="fa-solid fa-code-commit"></i>
-                                </div>
-                                <span class="text-xs font-medium">Development Time</span>
-                            </div>
-                            <span class="text-xs font-bold text-white font-mono">Approx. 5 months</span>
-                        </div>
-
-                        <!-- Active Users -->
-                        <div class="flex items-center justify-between p-3 rounded-xl bg-slate-950/60 border border-slate-800/80">
-                            <div class="flex items-center space-x-3 text-gray-300">
-                                <div class="w-8 h-8 rounded-lg bg-blue-500/20 border border-blue-500/30 flex items-center justify-center text-blue-400 text-xs">
-                                    <i class="fa-solid fa-users"></i>
-                                </div>
-                                <span class="text-xs font-medium">Active Users</span>
-                            </div>
-                            <span class="text-xs font-bold text-white font-mono">2 Users</span>
-                        </div>
-
-                        <!-- Stock Left -->
-                        <div class="flex items-center justify-between p-3 rounded-xl bg-slate-950/60 border border-slate-800/80">
-                            <div class="flex items-center space-x-3 text-gray-300">
-                                <div class="w-8 h-8 rounded-lg bg-red-500/20 border border-red-500/30 flex items-center justify-center text-red-400 text-xs">
-                                    <i class="fa-solid fa-boxes-stacked"></i>
-                                </div>
-                                <span class="text-xs font-medium">Rivals Stock</span>
-                            </div>
-                            <span class="text-xs font-bold px-2.5 py-1 rounded-md bg-red-500/20 text-red-400 border border-red-500/40 font-mono">
-                                1 Unit Left
-                            </span>
-                        </div>
-
-                        <!-- Price Tag -->
-                        <div class="flex items-center justify-between p-3.5 rounded-xl bg-gradient-to-r from-cyan-950/60 to-purple-950/60 border border-cyan-500/40 shadow-inner">
-                            <div class="flex items-center space-x-3 text-gray-300">
-                                <div class="w-8 h-8 rounded-lg bg-yellow-500/20 border border-yellow-500/30 flex items-center justify-center text-yellow-400 text-xs font-bold">
-                                    R$
-                                </div>
-                                <span class="text-xs font-bold text-white">Price</span>
-                            </div>
-                            <span class="font-display text-xl font-black text-cyber-cyan">70 Robux</span>
-                        </div>
+                    <div class="flex gap-2">
+                        <span class="font-mono text-cyber-cyan font-bold">2.</span>
+                        <p>Open a ticket in our official Discord server and attach a screenshot proving the Robux transfer.</p>
                     </div>
 
-                    <!-- Buy CTA Button -->
+                    <div class="flex gap-2">
+                        <span class="font-mono text-cyber-cyan font-bold">3.</span>
+                        <p>Send the screenshot in your Discord ticket. Our administrators will review and verify it quickly.</p>
+                    </div>
+
+                    <div class="flex gap-2">
+                        <span class="font-mono text-cyber-cyan font-bold">4.</span>
+                        <p>After verification, you will receive your official key site link directly from an administrator.</p>
+                    </div>
+                </div>
+
+                <div class="space-y-3">
+                    <a 
+                        href="https://discord.gg/FXkppbKqr" 
+                        target="_blank" 
+                        rel="noopener noreferrer" 
+                        class="w-full py-3.5 px-6 rounded-xl font-display font-bold text-xs uppercase tracking-wider btn-discord text-white flex items-center justify-center gap-2 cursor-pointer">
+                        <i class="fa-brands fa-discord text-base"></i>
+                        <span>Open Discord Ticket Now</span>
+                    </a>
+                    
                     <button 
-                        onclick="openCheckoutModal()"
-                        class="w-full py-4 px-6 rounded-xl font-display font-extrabold text-white btn-cyber flex items-center justify-center space-x-2 text-sm cursor-pointer uppercase tracking-wider">
-                        <i class="fa-solid fa-bolt text-yellow-300"></i>
-                        <span>Buy Now</span>
+                        onclick="backToStep1()" 
+                        class="w-full py-2.5 px-4 rounded-xl text-xs font-mono text-gray-400 hover:text-white transition-colors text-center">
+                        ← Back to previous step
                     </button>
                 </div>
             </div>
 
         </div>
-    </main>
-
-    <!-- Footer -->
-    <footer class="relative z-10 border-t border-slate-900/90 py-6 text-center text-xs text-gray-500 glass-panel">
-        <p>© 2026 RIVALS HUB. All rights reserved. Powered by RIVALS SCRIPT Team.</p>
-    </footer>
-
-    <!-- SCRIPT STATUS LEGEND MODAL -->
-    <div id="statusModal" class="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/85 modal-backdrop hidden">
-        <div class="glass-panel w-full max-w-md rounded-2xl p-6 border border-cyan-500/40 shadow-2xl relative">
-            <button onclick="closeModals()" class="absolute top-4 right-4 text-gray-400 hover:text-white transition-colors">
-                <i class="fa-solid fa-xmark text-xl"></i>
-            </button>
-
-            <div class="mb-5">
-                <h2 class="font-display text-lg font-bold text-white flex items-center gap-2">
-                    <i class="fa-solid fa-sliders text-cyber-cyan"></i>
-                    Script Status Definition
-                </h2>
-                <p class="text-xs text-gray-400 mt-1">Status key for Rivals Hub scripts.</p>
-            </div>
-
-            <!-- Status List -->
-            <div class="space-y-2.5 text-sm mb-6">
-                <div class="p-3 rounded-xl bg-slate-950/90 border border-slate-800 flex items-center space-x-3">
-                    <span class="text-lg">🟢</span>
-                    <span class="font-bold text-emerald-400">Safe (undetected)</span>
-                </div>
-                <div class="p-3 rounded-xl bg-slate-950/90 border border-slate-800 flex items-center space-x-3">
-                    <span class="text-lg">🟡</span>
-                    <span class="font-bold text-yellow-400">Use at your own risk</span>
-                </div>
-                <div class="p-3 rounded-xl bg-slate-950/90 border border-slate-800 flex items-center space-x-3">
-                    <span class="text-lg">🔴</span>
-                    <span class="font-bold text-red-400">Down or Detected</span>
-                </div>
-                <div class="p-3 rounded-xl bg-slate-950/90 border border-slate-800 flex items-center space-x-3">
-                    <span class="text-lg">🟣</span>
-                    <span class="font-bold text-purple-400">Development</span>
-                </div>
-                <div class="p-3 rounded-xl bg-slate-950/90 border border-slate-800 flex items-center space-x-3">
-                    <span class="text-lg">🖤</span>
-                    <span class="font-bold text-gray-400">Test (down)</span>
-                </div>
-            </div>
-
-            <!-- Active Status Box -->
-            <div class="p-3 bg-emerald-950/40 border border-emerald-500/30 rounded-xl mb-6 text-xs text-emerald-300 flex items-center justify-between">
-                <span>Current Status: 🟢 <strong>Safe (undetected)</strong></span>
-                <span class="font-mono text-cyan-300">V0.9.5e</span>
-            </div>
-
-            <button onclick="closeModals()" class="w-full py-3 rounded-xl bg-slate-800 hover:bg-slate-700 text-xs font-bold text-white transition-colors">
-                Close
-            </button>
-        </div>
     </div>
 
-    <!-- INTERACTIVE STEP 1 MODAL: Contact & Payment Selection -->
-    <div id="step1Modal" class="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/85 modal-backdrop hidden">
-        <div class="glass-panel w-full max-w-lg rounded-2xl p-6 md:p-8 border border-cyan-500/40 shadow-2xl relative">
-            <button onclick="closeModals()" class="absolute top-4 right-4 text-gray-400 hover:text-white transition-colors">
-                <i class="fa-solid fa-xmark text-xl"></i>
-            </button>
-
-            <div class="mb-6">
-                <span class="text-xs font-mono font-extrabold uppercase tracking-wider text-cyber-cyan">Step 1 of 2</span>
-                <h2 class="font-display text-xl font-bold text-white mt-1">Contact & Delivery Details</h2>
-                <p class="text-xs text-gray-400 mt-1">Please enter your Discord details to link your license delivery.</p>
-            </div>
-
-            <form onsubmit="handleStep1Submit(event)" class="space-y-5">
-                <!-- Discord Input -->
-                <div>
-                    <label class="block text-xs font-semibold text-gray-300 mb-2">
-                        Discord User ID or Username <span class="text-red-400">*</span>
-                    </label>
-                    <div class="relative">
-                        <span class="absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none text-indigo-400">
-                            <i class="fa-brands fa-discord"></i>
-                        </span>
-                        <input 
-                            type="text" 
-                            id="discordUsername" 
-                            required 
-                            placeholder="e.g., discord_username or 1234567890" 
-                            class="w-full pl-10 pr-4 py-3 bg-slate-950/90 border border-slate-700 rounded-xl text-sm text-white placeholder-gray-500 focus:outline-none focus:border-cyan-400 focus:ring-1 focus:ring-cyan-400 transition-all font-mono"
-                        >
-                    </div>
-                </div>
-
-                <!-- Payment Method Selection -->
-                <div>
-                    <label class="block text-xs font-semibold text-gray-300 mb-2">
-                        2. Select Payment Method
-                    </label>
-                    <div class="p-3.5 rounded-xl bg-slate-950/90 border-2 border-cyan-400 flex items-center justify-between cursor-pointer">
-                        <div class="flex items-center space-x-3">
-                            <div class="w-8 h-8 rounded-lg bg-yellow-500/20 text-yellow-400 flex items-center justify-center font-bold text-sm border border-yellow-500/30">
-                                R$
-                            </div>
-                            <div>
-                                <p class="text-sm font-bold text-white">Robux</p>
-                                <p class="text-xs text-gray-400">70 Robux</p>
-                            </div>
-                        </div>
-                        <i class="fa-solid fa-circle-check text-cyan-400 text-lg"></i>
-                    </div>
-                </div>
-
-                <!-- Submit Button -->
-                <button 
-                    type="submit" 
-                    class="w-full py-3.5 px-6 rounded-xl font-display font-extrabold text-white btn-cyber flex items-center justify-center space-x-2 text-sm cursor-pointer mt-4 uppercase tracking-wider">
-                    <span>Pay with Robux</span>
-                    <i class="fa-solid fa-arrow-right text-xs"></i>
-                </button>
-            </form>
-        </div>
-    </div>
-
-    <!-- INTERACTIVE STEP 2 MODAL: Robux Transfer Instructions -->
-    <div id="step2Modal" class="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/85 modal-backdrop hidden">
-        <div class="glass-panel w-full max-w-lg rounded-2xl p-6 md:p-8 border border-cyan-500/40 shadow-2xl relative">
-            <button onclick="closeModals()" class="absolute top-4 right-4 text-gray-400 hover:text-white transition-colors">
-                <i class="fa-solid fa-xmark text-xl"></i>
-            </button>
-
-            <div class="mb-5">
-                <span class="text-xs font-mono font-extrabold uppercase tracking-wider text-emerald-400">Step 2 of 2</span>
-                <h2 class="font-display text-xl font-bold text-white mt-1">Payment Instructions</h2>
-                <p class="text-xs text-gray-400 mt-1">Complete the steps below to receive your script key.</p>
-            </div>
-
-            <!-- Step Guide -->
-            <div class="space-y-3.5 bg-slate-950/90 p-4 rounded-xl border border-slate-800 mb-5 text-sm">
-                <div class="flex items-start space-x-3">
-                    <span class="w-6 h-6 rounded-full bg-cyan-500/20 text-cyber-cyan font-bold text-xs flex items-center justify-center flex-shrink-0 mt-0.5 border border-cyan-400/30">1</span>
-                    <div class="text-gray-200 text-xs md:text-sm">
-                        Send <strong class="text-yellow-300">70 Robux</strong> in Roblox to <span class="bg-slate-800 px-2 py-0.5 rounded text-cyan-300 font-mono font-bold select-all">koyohwan2e</span>.
-                    </div>
-                </div>
-
-                <div class="flex items-start space-x-3">
-                    <span class="w-6 h-6 rounded-full bg-cyan-500/20 text-cyber-cyan font-bold text-xs flex items-center justify-center flex-shrink-0 mt-0.5 border border-cyan-400/30">2</span>
-                    <div class="text-gray-200 text-xs md:text-sm">
-                        Open a ticket in our Discord server and screenshot the sent Robux proof.
-                    </div>
-                </div>
-
-                <div class="flex items-start space-x-3">
-                    <span class="w-6 h-6 rounded-full bg-cyan-500/20 text-cyber-cyan font-bold text-xs flex items-center justify-center flex-shrink-0 mt-0.5 border border-cyan-400/30">3</span>
-                    <div class="text-gray-200 text-xs md:text-sm">
-                        Send the screenshot in the ticket for staff verification.
-                    </div>
-                </div>
-
-                <div class="flex items-start space-x-3">
-                    <span class="w-6 h-6 rounded-full bg-emerald-500/20 text-emerald-400 font-bold text-xs flex items-center justify-center flex-shrink-0 mt-0.5 border border-emerald-400/30">4</span>
-                    <div class="text-gray-200 text-xs md:text-sm">
-                        After verification, you will receive the key site link from an administrator.
-                    </div>
-                </div>
-            </div>
-
-            <!-- Copy Roblox Account Username -->
-            <div class="mb-6 p-3 bg-slate-900/90 rounded-xl border border-slate-800 flex items-center justify-between">
-                <div>
-                    <p class="text-[10px] uppercase font-bold text-gray-400 font-mono">Roblox Username</p>
-                    <p class="text-sm font-mono font-bold text-cyan-300">koyohwan2e</p>
-                </div>
-                <button 
-                    onclick="copyToClipboard('koyohwan2e', this)" 
-                    class="px-3 py-1.5 bg-slate-800 hover:bg-slate-700 text-xs font-semibold text-gray-200 rounded-lg transition-colors flex items-center gap-1.5 border border-slate-700">
-                    <i class="fa-regular fa-copy"></i>
-                    <span>Copy Name</span>
-                </button>
-            </div>
-
-            <button 
-                onclick="closeModals()" 
-                class="w-full py-3 px-6 rounded-xl font-bold text-white bg-slate-800 hover:bg-slate-700 transition-colors text-xs uppercase tracking-wider">
-                I Have Completed The Transfer
-            </button>
-        </div>
-    </div>
-
-    <!-- FULLSCREEN LIGHTBOX MODAL FOR IMAGE -->
-    <div id="imageLightbox" class="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/90 modal-backdrop hidden" onclick="closeImageLightbox()">
-        <div class="relative max-w-5xl max-h-[90vh] flex items-center justify-center">
-            <button onclick="closeImageLightbox()" class="absolute -top-12 right-0 text-white text-2xl hover:text-cyan-400 transition-colors">
-                <i class="fa-solid fa-xmark"></i>
-            </button>
-            <img 
-                src="https://cdn.discordapp.com/attachments/1545735160970874951/1563497327539519610/image.png?ex=6addd7db&is=6adc865b&hm=9a7ea4accfcf7d410e1bb2077f70b53137dce9a6d0a1832933b7df35b2be2540&" 
-                alt="Full Resolution Script Showcase" 
-                class="max-w-full max-h-[85vh] object-contain rounded-xl border border-cyan-500/40 shadow-2xl"
-            />
-        </div>
-    </div>
-
-    <!-- INTERACTIVE SCRIPT LOGIC -->
+    <!-- JavaScript Interactive Logic -->
     <script>
-        // Modal Handlers
-        function openCheckoutModal() {
-            closeModals();
-            document.getElementById('step1Modal').classList.remove('hidden');
+        function toggleModal(modalId) {
+            const modal = document.getElementById(modalId);
+            if (modal) {
+                modal.classList.toggle('hidden');
+            }
         }
 
-        function openStatusModal() {
-            closeModals();
-            document.getElementById('statusModal').classList.remove('hidden');
+        function goToStep2() {
+            const discordUser = document.getElementById('discordUser').value.trim();
+            if (!discordUser) {
+                alert('Please enter your Discord username or ID before proceeding.');
+                return;
+            }
+            document.getElementById('step1').classList.add('hidden');
+            document.getElementById('step2').classList.remove('hidden');
         }
 
-        function openImageLightbox() {
-            document.getElementById('imageLightbox').classList.remove('hidden');
+        function backToStep1() {
+            document.getElementById('step2').classList.add('hidden');
+            document.getElementById('step1').classList.remove('hidden');
         }
 
-        function closeImageLightbox() {
-            document.getElementById('imageLightbox').classList.add('hidden');
-        }
-
-        function closeModals() {
-            document.getElementById('step1Modal').classList.add('hidden');
-            document.getElementById('step2Modal').classList.add('hidden');
-            document.getElementById('statusModal').classList.add('hidden');
-            document.getElementById('imageLightbox').classList.add('hidden');
-        }
-
-        function handleStep1Submit(event) {
-            event.preventDefault();
-            const username = document.getElementById('discordUsername').value.trim();
-            if (!username) return;
-
-            document.getElementById('step1Modal').classList.add('hidden');
-            document.getElementById('step2Modal').classList.remove('hidden');
-        }
-
-        // Copy Helper
-        function copyToClipboard(text, buttonEl) {
-            const tempInput = document.createElement("input");
-            tempInput.value = text;
-            document.body.appendChild(tempInput);
-            tempInput.select();
+        function copyText(text, btn) {
+            const temp = document.createElement("input");
+            temp.value = text;
+            document.body.appendChild(temp);
+            temp.select();
             document.execCommand("copy");
-            document.body.removeChild(tempInput);
+            document.body.removeChild(temp);
 
-            const originalHTML = buttonEl.innerHTML;
-            buttonEl.innerHTML = '<i class="fa-solid fa-check text-emerald-400"></i> <span class="text-emerald-400">Copied!</span>';
-            setTimeout(() => {
-                buttonEl.innerHTML = originalHTML;
-            }, 2000);
+            const orig = btn.innerHTML;
+            btn.innerHTML = '<i class="fa-solid fa-check text-emerald-400"></i> Copied!';
+            setTimeout(() => { btn.innerHTML = orig; }, 2000);
         }
 
-        document.addEventListener('keydown', function(e) {
-            if (e.key === "Escape") closeModals();
-        });
-
-        /* =========================================================
-           HIGH-TECH DYNAMIC CYBERPUNK ELECTRIC CANVAS ANIMATION
-           ========================================================= */
+        /* Lightning Canvas Animation */
         const canvas = document.getElementById('cyberCanvas');
         const ctx = canvas.getContext('2d');
 
@@ -654,7 +627,6 @@
         window.addEventListener('resize', resizeCanvas);
         resizeCanvas();
 
-        // Electric Lightning Bolt
         class LightningBolt {
             constructor() {
                 this.reset();
@@ -709,13 +681,12 @@
             }
         }
 
-        // Cyber Plasma Sparks
         class CyberParticle {
             constructor(x, y) {
                 this.x = x || Math.random() * width;
                 this.y = y || Math.random() * height;
-                this.vx = (Math.random() - 0.5) * 2.5;
-                this.vy = (Math.random() - 0.5) * 2.5;
+                this.vx = (Math.random() - 0.5) * 2.2;
+                this.vy = (Math.random() - 0.5) * 2.2;
                 this.size = Math.random() * 2 + 0.8;
                 this.life = Math.random() * 50 + 25;
                 this.maxLife = this.life;
@@ -741,7 +712,7 @@
             }
         }
 
-        for (let i = 0; i < 50; i++) {
+        for (let i = 0; i < 40; i++) {
             particles.push(new CyberParticle());
         }
 
