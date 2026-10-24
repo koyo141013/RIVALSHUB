@@ -169,7 +169,7 @@
                     <i class="fa-solid fa-circle-info text-[10px] opacity-70"></i>
                 </button>
 
-                <!-- Discord Top Button (NEW) -->
+                <!-- Discord Top Button -->
                 <a 
                     href="https://discord.gg/FXkppbKqr" 
                     target="_blank" 
@@ -224,7 +224,7 @@
                 <!-- Product Preview Image Frame -->
                 <div class="relative w-full rounded-2xl overflow-hidden bg-slate-950 border border-cyan-500/30 flex items-center justify-center p-2 min-h-[320px] sm:min-h-[420px] group">
                     <img 
-                        src="https://cdn.discordapp.com/attachments/1545735160970874951/1563497327539519610/image.png?ex=6addd7db&is=6adc865b&hm=9a7ea4accfcf7d410e1bb2077f70b53137dce9a6d0a1832933b7df35b2be2540&hm=9a7ea4accfcf7d410e1bb2077f70b53137dce9a6d0a1832933b7df35b2be2540&" 
+                        src="https://cdn.discordapp.com/attachments/1545735160970874951/1563497327539519610/image.png?ex=6addd7db&is=6adc865b&hm=9a7ea4accfcf7d410e1bb2077f70b53137dce9a6d0a1832933b7df35b2be2540&" 
                         alt="Rivals Hub Interface Preview"
                         class="w-full h-auto max-h-[500px] object-contain rounded-xl shadow-2xl transition-transform duration-500 group-hover:scale-[1.01]"
                         onerror="this.onerror=null; this.src='https://placehold.co/800x500/0b0f1c/00f0ff?text=RIVALS+HUB+PREVIEW';"
@@ -317,7 +317,7 @@
                 </span>
             </div>
 
-            <!-- Features Grid (Including new requested features: ESP, Skybox Changer, Fast Shot, No Spread) -->
+            <!-- Features Grid -->
             <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-3 sm:gap-4">
                 
                 <!-- Silent Aim -->
@@ -374,7 +374,7 @@
                     <p class="text-[10px] text-gray-400 mt-0.5">Identity obfuscation</p>
                 </div>
 
-                <!-- ESP (NEW) -->
+                <!-- ESP -->
                 <div class="p-4 bg-slate-950/70 rounded-2xl border border-cyan-500/20 hover:border-cyan-400 transition-all group">
                     <div class="w-8 h-8 rounded-lg bg-cyan-500/20 text-cyber-cyan flex items-center justify-center mb-2 group-hover:scale-110 transition-transform">
                         <i class="fa-solid fa-eye"></i>
@@ -383,7 +383,7 @@
                     <p class="text-[10px] text-gray-400 mt-0.5">Wallhack & info visualizer</p>
                 </div>
 
-                <!-- Skybox Changer (NEW) -->
+                <!-- Skybox Changer -->
                 <div class="p-4 bg-slate-950/70 rounded-2xl border border-cyan-500/20 hover:border-cyan-400 transition-all group">
                     <div class="w-8 h-8 rounded-lg bg-amber-500/20 text-amber-400 flex items-center justify-center mb-2 group-hover:scale-110 transition-transform">
                         <i class="fa-solid fa-cloud-moon"></i>
@@ -392,7 +392,7 @@
                     <p class="text-[10px] text-gray-400 mt-0.5">Custom map atmosphere</p>
                 </div>
 
-                <!-- Fast Shot (NEW) -->
+                <!-- Fast Shot -->
                 <div class="p-4 bg-slate-950/70 rounded-2xl border border-cyan-500/20 hover:border-cyan-400 transition-all group">
                     <div class="w-8 h-8 rounded-lg bg-pink-500/20 text-pink-400 flex items-center justify-center mb-2 group-hover:scale-110 transition-transform">
                         <i class="fa-solid fa-bolt"></i>
@@ -401,7 +401,7 @@
                     <p class="text-[10px] text-gray-400 mt-0.5">Accelerated fire rate</p>
                 </div>
 
-                <!-- No Spread (NEW) -->
+                <!-- No Spread -->
                 <div class="p-4 bg-slate-950/70 rounded-2xl border border-cyan-500/20 hover:border-cyan-400 transition-all group">
                     <div class="w-8 h-8 rounded-lg bg-teal-500/20 text-teal-300 flex items-center justify-center mb-2 group-hover:scale-110 transition-transform">
                         <i class="fa-solid fa-arrows-to-dot"></i>
@@ -522,4 +522,192 @@
                 </div>
 
                 <button 
-<!-- ... existing code -->
+                    onclick="goToStep2()" 
+                    class="w-full py-3.5 px-6 rounded-xl font-display font-bold text-xs uppercase btn-cyber text-white flex items-center justify-center gap-2">
+                    <span>Pay with Robux</span>
+                    <i class="fa-solid fa-arrow-right"></i>
+                </button>
+            </div>
+
+            <!-- Step 2: Robux Transfer Instructions -->
+            <div id="step2" class="hidden space-y-4">
+                <div class="flex items-center justify-between mb-2">
+                    <span class="px-2.5 py-0.5 rounded-full bg-purple-500/20 text-purple-300 text-xs font-mono font-bold">Step 2 / 2</span>
+                    <button onclick="goToStep1()" class="text-xs text-cyber-cyan hover:underline flex items-center gap-1">
+                        <i class="fa-solid fa-arrow-left"></i> Back
+                    </button>
+                </div>
+
+                <h3 class="font-display text-base font-bold text-white mb-2">Payment Instructions</h3>
+
+                <div class="space-y-3 font-sans text-xs">
+                    
+                    <!-- Instruction 1 -->
+                    <div class="p-3 bg-slate-950/80 rounded-xl border border-slate-800 space-y-1">
+                        <div class="font-bold text-white flex items-center justify-between">
+                            <span>1. Send 70 Robux on Roblox to <span class="text-yellow-400 font-mono">koyohwan2e</span></span>
+                            <button 
+                                onclick="copyText('koyohwan2e', 'copiedTag1')" 
+                                class="text-[10px] bg-cyan-950 text-cyber-cyan border border-cyan-500/40 px-2 py-0.5 rounded hover:bg-cyan-900 transition-colors">
+                                <i class="fa-regular fa-copy"></i> Copy Name
+                            </button>
+                        </div>
+                        <div id="copiedTag1" class="text-[10px] text-emerald-400 hidden font-mono">Copied to clipboard!</div>
+                    </div>
+
+                    <!-- Instruction 2 -->
+                    <div class="p-3 bg-slate-950/80 rounded-xl border border-slate-800">
+                        <div class="font-bold text-white">2. Open a ticket in our Discord server</div>
+                        <p class="text-gray-400 text-[11px] mt-0.5">Take a screenshot of the sent Robux transaction.</p>
+                    </div>
+
+                    <!-- Instruction 3 -->
+                    <div class="p-3 bg-slate-950/80 rounded-xl border border-slate-800">
+                        <div class="font-bold text-white">3. Send the screenshot in the ticket</div>
+                        <p class="text-gray-400 text-[11px] mt-0.5">An administrator will manually verify your transfer.</p>
+                    </div>
+
+                    <!-- Instruction 4 (UPDATED AS REQUESTED) -->
+                    <div class="p-3 bg-slate-950/80 rounded-xl border border-cyan-500/40 bg-cyan-950/30">
+                        <div class="font-bold text-cyber-cyan flex items-center gap-1.5">
+                            <i class="fa-solid fa-circle-check"></i>
+                            <span>4. Receive key site link</span>
+                        </div>
+                        <p class="text-gray-300 text-[11px] mt-0.5">
+                            After verification, you will receive the key site link from an administrator.
+                        </p>
+                    </div>
+
+                </div>
+
+                <div class="pt-2 flex items-center gap-2">
+                    <a 
+                        href="https://discord.gg/FXkppbKqr" 
+                        target="_blank" 
+                        rel="noopener noreferrer"
+                        class="flex-1 py-3 px-4 rounded-xl font-display font-bold text-xs uppercase btn-discord text-white text-center flex items-center justify-center gap-2">
+                        <i class="fa-brands fa-discord"></i>
+                        <span>Open Discord Server</span>
+                    </a>
+                    <button 
+                        onclick="toggleModal('purchaseModal')" 
+                        class="py-3 px-4 rounded-xl font-mono text-xs text-gray-400 bg-slate-900 border border-slate-800 hover:text-white hover:bg-slate-800">
+                        Done
+                    </button>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <!-- JavaScript Logic -->
+    <script>
+        // Modal Toggling Logic
+        function toggleModal(modalId) {
+            const modal = document.getElementById(modalId);
+            if (modal) {
+                modal.classList.toggle('hidden');
+            }
+        }
+
+        function goToStep2() {
+            const userInput = document.getElementById('discordUser').value.trim();
+            if (!userInput) {
+                alert('Please enter your Discord Username or ID before proceeding.');
+                return;
+            }
+            document.getElementById('step1').classList.add('hidden');
+            document.getElementById('step2').classList.remove('hidden');
+        }
+
+        function goToStep1() {
+            document.getElementById('step2').classList.add('hidden');
+            document.getElementById('step1').classList.remove('hidden');
+        }
+
+        function copyText(text, tagId) {
+            navigator.clipboard.writeText(text).then(() => {
+                const tag = document.getElementById(tagId);
+                if (tag) {
+                    tag.classList.remove('hidden');
+                    setTimeout(() => tag.classList.add('hidden'), 2000);
+                }
+            });
+        }
+
+        // Canvas Electric Lightning Effect
+        const canvas = document.getElementById('cyberCanvas');
+        const ctx = canvas.getContext('2d');
+
+        function resizeCanvas() {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+        }
+        window.addEventListener('resize', resizeCanvas);
+        resizeCanvas();
+
+        let bolts = [];
+
+        class LightningBolt {
+            constructor() {
+                this.reset();
+            }
+
+            reset() {
+                this.x = Math.random() * canvas.width;
+                this.y = 0;
+                this.path = [{ x: this.x, y: this.y }];
+                this.life = 0;
+                this.maxLife = Math.random() * 15 + 10;
+                this.color = Math.random() > 0.5 ? '#00f0ff' : '#a855f7';
+                
+                let currX = this.x;
+                let currY = this.y;
+                while (currY < canvas.height) {
+                    currX += (Math.random() - 0.5) * 40;
+                    currY += Math.random() * 30 + 10;
+                    this.path.push({ x: currX, y: currY });
+                }
+            }
+
+            update() {
+                this.life++;
+                if (this.life > this.maxLife) {
+                    this.reset();
+                }
+            }
+
+            draw() {
+                if (Math.random() > 0.6) return; // Flickering effect
+                ctx.beginPath();
+                ctx.strokeStyle = this.color;
+                ctx.lineWidth = Math.random() * 2 + 1;
+                ctx.shadowBlur = 15;
+                ctx.shadowColor = this.color;
+
+                for (let i = 0; i < this.path.length - 1; i++) {
+                    ctx.moveTo(this.path[i].x, this.path[i].y);
+                    ctx.lineTo(this.path[i + 1].x, this.path[i + 1].y);
+                }
+                ctx.stroke();
+                ctx.shadowBlur = 0;
+            }
+        }
+
+        for (let i = 0; i < 3; i++) {
+            bolts.push(new LightningBolt());
+        }
+
+        function animateCanvas() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            bolts.forEach(bolt => {
+                bolt.update();
+                bolt.draw();
+            });
+            requestAnimationFrame(animateCanvas);
+        }
+
+        animateCanvas();
+    </script>
+</body>
+</html>
