@@ -12,56 +12,71 @@
             theme: {
                 extend: {
                     colors: {
-                        brand: {
-                            50: '#f0f3ff',
-                            100: '#e0e7ff',
-                            500: '#6366f1',
-                            600: '#4f46e5',
-                            700: '#4338ca',
-                            accent: '#a855f7',
-                            electric: '#00f0ff',
-                            thunder: '#3b82f6',
-                            plasma: '#d946ef'
+                        cyber: {
+                            bg: '#04060c',
+                            card: 'rgba(11, 15, 28, 0.72)',
+                            border: 'rgba(0, 240, 255, 0.2)',
+                            borderHover: 'rgba(0, 240, 255, 0.6)',
+                            cyan: '#00f0ff',
+                            purple: '#a855f7',
+                            pink: '#ec4899',
+                            yellow: '#facc15',
+                            emerald: '#10b981'
                         }
                     },
                     fontFamily: {
                         sans: ['Inter', 'sans-serif'],
+                        display: ['Orbitron', 'sans-serif'],
                     },
                     animation: {
-                        'pulse-glow': 'pulseGlow 2s infinite alternate',
-                        'electric-border': 'electricBorder 3s infinite linear',
-                        'lightning-flash': 'lightningFlash 4s infinite'
+                        'glow-pulse': 'glowPulse 2.5s infinite alternate',
+                        'electric-shift': 'electricShift 4s ease infinite',
+                        'float-slow': 'floatSlow 6s ease-in-out infinite',
+                        'radar-spin': 'radarSpin 8s linear infinite',
                     },
                     keyframes: {
-                        pulseGlow: {
-                            '0%': { boxShadow: '0 0 15px rgba(0, 240, 255, 0.3), inset 0 0 10px rgba(0, 240, 255, 0.2)' },
-                            '100%': { boxShadow: '0 0 35px rgba(168, 85, 247, 0.7), inset 0 0 20px rgba(168, 85, 247, 0.4)' }
+                        glowPulse: {
+                            '0%': { boxShadow: '0 0 15px rgba(0, 240, 255, 0.25), inset 0 0 10px rgba(0, 240, 255, 0.15)' },
+                            '100%': { boxShadow: '0 0 35px rgba(168, 85, 247, 0.6), inset 0 0 20px rgba(168, 85, 247, 0.3)' }
                         },
-                        lightningFlash: {
-                            '0%, 92%, 96%, 100%': { opacity: '0.1' },
-                            '93%': { opacity: '0.6' },
-                            '94%': { opacity: '0.2' },
-                            '95%': { opacity: '0.8' }
+                        electricShift: {
+                            '0%, 100%': { backgroundPosition: '0% 50%' },
+                            '50%': { backgroundPosition: '100% 50%' }
+                        },
+                        floatSlow: {
+                            '0%, 100%': { transform: 'translateY(0px)' },
+                            '50%': { transform: 'translateY(-6px)' }
+                        },
+                        radarSpin: {
+                            '0%': { transform: 'rotate(0deg)' },
+                            '100%': { transform: 'rotate(360deg)' }
                         }
                     }
                 }
             }
         }
     </script>
+    <!-- Google Fonts: Orbitron & Inter -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Orbitron:wght@600;800;900&display=swap" rel="stylesheet">
     <!-- FontAwesome Icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <!-- Google Font -->
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+
     <style>
         body {
             font-family: 'Inter', sans-serif;
-            background-color: #05070e;
+            background-color: #04060c;
             color: #f3f4f6;
             overflow-x: hidden;
         }
 
-        /* Lightning Canvas Background */
-        #lightningCanvas {
+        .font-display {
+            font-family: 'Orbitron', sans-serif;
+        }
+
+        /* Canvas Background */
+        #cyberCanvas {
             position: fixed;
             top: 0;
             left: 0;
@@ -71,65 +86,65 @@
             z-index: 1;
         }
 
-        /* Glassmorphism styling */
-        .glass-card {
-            background: rgba(10, 14, 26, 0.75);
-            backdrop-filter: blur(18px);
-            -webkit-backdrop-filter: blur(18px);
-            border: 1px solid rgba(0, 240, 255, 0.15);
-            box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.6);
+        /* Ambient Plasma Glow Behind Main Card */
+        .plasma-glow {
+            position: absolute;
+            width: 600px;
+            height: 600px;
+            background: radial-gradient(circle, rgba(0, 240, 255, 0.12) 0%, rgba(168, 85, 247, 0.08) 40%, rgba(0, 0, 0, 0) 70%);
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            pointer-events: none;
+            z-index: 2;
+            filter: blur(50px);
         }
 
-        .glass-card-hover {
-            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        /* Glassmorphism Styling */
+        .glass-panel {
+            background: rgba(11, 15, 28, 0.72);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border: 1px solid rgba(0, 240, 255, 0.18);
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.7), inset 0 1px 0 rgba(255, 255, 255, 0.05);
         }
 
-        .glass-card-hover:hover {
+        .glass-panel-hover {
+            transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .glass-panel-hover:hover {
             border-color: rgba(0, 240, 255, 0.5);
-            box-shadow: 0 0 25px rgba(0, 240, 255, 0.3);
+            box-shadow: 0 0 30px rgba(0, 240, 255, 0.25), inset 0 1px 0 rgba(255, 255, 255, 0.1);
             transform: translateY(-2px);
         }
 
-        /* Electric Lightning Button */
-        .btn-electric {
-            background: linear-gradient(135deg, #4f46e5 0%, #a855f7 50%, #00f0ff 100%);
+        /* Cyber Electric CTA Button */
+        .btn-cyber {
+            background: linear-gradient(135deg, #00f0ff 0%, #7c3aed 50%, #ec4899 100%);
             background-size: 200% 200%;
-            animation: gradientMove 3s ease infinite;
-            box-shadow: 0 0 20px rgba(0, 240, 255, 0.4);
+            animation: electricShift 4s ease infinite;
+            box-shadow: 0 0 25px rgba(0, 240, 255, 0.35);
             transition: all 0.3s ease;
         }
 
-        @keyframes gradientMove {
-            0% { background-position: 0% 50%; }
-            50% { background-position: 100% 50%; }
-            100% { background-position: 0% 50%; }
-        }
-
-        .btn-electric:hover {
-            box-shadow: 0 0 35px rgba(0, 240, 255, 0.8), 0 0 15px rgba(168, 85, 247, 0.6);
+        .btn-cyber:hover {
+            box-shadow: 0 0 45px rgba(0, 240, 255, 0.7), 0 0 20px rgba(168, 85, 247, 0.5);
             transform: translateY(-2px) scale(1.01);
         }
 
-        /* Modal blur backdrop */
-        .modal-blur {
-            backdrop-filter: blur(12px);
-            -webkit-backdrop-filter: blur(12px);
+        /* Modal Overlay Blur */
+        .modal-backdrop {
+            backdrop-filter: blur(14px);
+            -webkit-backdrop-filter: blur(14px);
         }
 
-        /* Image Display Frame with Electric Aura */
-        .image-frame {
-            position: relative;
-            background: radial-gradient(circle at center, rgba(15, 23, 42, 0.9) 0%, rgba(5, 7, 14, 0.95) 100%);
-            border: 1px solid rgba(0, 240, 255, 0.3);
-            box-shadow: 0 0 30px rgba(0, 240, 255, 0.2), inset 0 0 20px rgba(168, 85, 247, 0.15);
-        }
-
-        /* Custom scrollbar */
+        /* Custom Scrollbars */
         ::-webkit-scrollbar {
             width: 8px;
         }
         ::-webkit-scrollbar-track {
-            background: #05070e;
+            background: #04060c;
         }
         ::-webkit-scrollbar-thumb {
             background: #1e293b;
@@ -141,116 +156,127 @@
         }
     </style>
 </head>
-<body class="min-h-screen flex flex-col justify-between relative selection:bg-brand-electric selection:text-black">
+<body class="min-h-screen flex flex-col justify-between relative selection:bg-cyber-cyan selection:text-black">
 
-    <!-- Lightning Dynamic Canvas Background -->
-    <canvas id="lightningCanvas"></canvas>
+    <!-- Canvas Animation Background -->
+    <canvas id="cyberCanvas"></canvas>
 
-    <!-- Thunder Ambient Flash Overlay -->
-    <div class="fixed inset-0 bg-blue-600/5 animate-lightning-flash pointer-events-none z-0"></div>
+    <!-- Background Ambient Glow -->
+    <div class="plasma-glow"></div>
 
-    <!-- Main Navigation Bar -->
-    <nav class="relative z-10 border-b border-cyan-900/40 glass-card px-6 py-4">
+    <!-- Top Navigation Header -->
+    <header class="relative z-10 border-b border-cyan-900/40 glass-panel px-6 py-4">
         <div class="max-w-6xl mx-auto flex items-center justify-between flex-wrap gap-4">
-            <div class="flex items-center space-x-3">
-                <div class="w-10 h-10 rounded-xl bg-gradient-to-tr from-blue-600 via-indigo-600 to-cyan-400 flex items-center justify-center font-black text-xl text-white shadow-lg shadow-cyan-500/40 border border-cyan-300/30">
-                    <i class="fa-solid fa-bolt text-yellow-300"></i>
+            
+            <!-- Logo Section -->
+            <div class="flex items-center space-x-3.5">
+                <div class="w-11 h-11 rounded-xl bg-gradient-to-tr from-cyan-500 via-indigo-600 to-purple-600 flex items-center justify-center font-black text-xl text-white shadow-lg shadow-cyan-500/30 border border-cyan-300/40 relative group">
+                    <i class="fa-solid fa-bolt-lightning text-yellow-300 animate-pulse"></i>
+                    <div class="absolute -inset-1 bg-cyan-500 rounded-xl blur opacity-30 group-hover:opacity-60 transition duration-300"></div>
                 </div>
                 <div>
-                    <span class="font-extrabold text-xl tracking-wider text-white flex items-center gap-1.5">
+                    <span class="font-display font-extrabold text-xl md:text-2xl tracking-wider text-white flex items-center gap-2">
                         RIVALS HUB
-                        <span class="inline-block w-2 h-2 rounded-full bg-cyan-400 animate-ping"></span>
+                        <span class="px-2 py-0.5 text-[9px] font-sans font-bold bg-cyan-500/20 text-cyber-cyan border border-cyan-400/30 rounded-full tracking-normal">ULTRA</span>
                     </span>
-                    <span class="text-xs text-brand-electric block font-mono font-semibold tracking-widest uppercase">Best Rivals Script</span>
+                    <span class="text-[11px] text-cyber-cyan block font-mono font-semibold tracking-widest uppercase opacity-90">Best Rivals Script</span>
                 </div>
             </div>
             
-            <!-- Script Status Button in Top Nav -->
+            <!-- Top Right: Script Status Toggle Button -->
             <div class="flex items-center space-x-3">
                 <button 
                     onclick="openStatusModal()" 
                     class="inline-flex items-center px-4 py-2 rounded-xl text-xs font-semibold bg-slate-900/90 text-white border border-cyan-500/40 hover:border-cyan-400 transition-all cursor-pointer shadow-lg hover:shadow-cyan-500/20 group">
                     <span class="w-2.5 h-2.5 rounded-full bg-emerald-400 mr-2 animate-pulse"></span>
                     <span class="mr-2 group-hover:text-cyan-300 transition-colors">Script Status</span>
-                    <i class="fa-solid fa-circle-info text-brand-electric text-sm"></i>
+                    <i class="fa-solid fa-sliders text-cyber-cyan text-sm"></i>
                 </button>
             </div>
         </div>
-    </nav>
+    </header>
 
-    <!-- Main Showcase Container -->
+    <!-- Main Content Container -->
     <main class="relative z-10 max-w-6xl mx-auto px-4 py-8 md:py-12 flex-grow flex items-center justify-center">
         <div class="w-full grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
             
-            <!-- Left Side: Product Image & Feature Grid -->
+            <!-- Left Side: Full Image Frame & Script Features -->
             <div class="lg:col-span-7 space-y-6">
                 
-                <!-- FULL IMAGE DISPLAY CONTAINER WITH FIT & FULL VISIBILITY -->
-                <div class="image-frame rounded-2xl p-3 md:p-4 border border-cyan-500/30 relative overflow-hidden group">
+                <!-- FULL IMAGE DISPLAY CONTAINER -->
+                <div class="glass-panel rounded-2xl p-3 md:p-4 border border-cyan-500/30 relative overflow-hidden group">
                     
-                    <!-- Decorative Corner Voltage Accents -->
-                    <div class="absolute top-2 left-2 w-3 h-3 border-t-2 border-l-2 border-cyan-400"></div>
-                    <div class="absolute top-2 right-2 w-3 h-3 border-t-2 border-r-2 border-cyan-400"></div>
-                    <div class="absolute bottom-2 left-2 w-3 h-3 border-b-2 border-l-2 border-cyan-400"></div>
-                    <div class="absolute bottom-2 right-2 w-3 h-3 border-b-2 border-r-2 border-cyan-400"></div>
+                    <!-- Decorative Corner Tech Accents -->
+                    <div class="absolute top-2 left-2 w-3 h-3 border-t-2 border-l-2 border-cyan-400 z-10"></div>
+                    <div class="absolute top-2 right-2 w-3 h-3 border-t-2 border-r-2 border-cyan-400 z-10"></div>
+                    <div class="absolute bottom-2 left-2 w-3 h-3 border-b-2 border-l-2 border-cyan-400 z-10"></div>
+                    <div class="absolute bottom-2 right-2 w-3 h-3 border-b-2 border-r-2 border-cyan-400 z-10"></div>
 
-                    <!-- Inner Image Container ensuring FULL visibility without cropping -->
-                    <div class="relative w-full flex items-center justify-center bg-black/60 rounded-xl overflow-hidden p-2 min-h-[260px] sm:min-h-[340px] border border-gray-800">
+                    <!-- Inner Frame for Image with 100% full view -->
+                    <div class="relative w-full flex items-center justify-center bg-black/70 rounded-xl overflow-hidden p-2 min-h-[280px] sm:min-h-[360px] border border-slate-800/80">
                         
-                        <!-- Main Product Image (100% visible, contain mode) -->
+                        <!-- Main Product Showcase Image -->
                         <img 
                             id="productImage"
                             src="https://cdn.discordapp.com/attachments/1545735160970874951/1563497327539519610/image.png?ex=6addd7db&is=6adc865b&hm=9a7ea4accfcf7d410e1bb2077f70b53137dce9a6d0a1832933b7df35b2be2540&" 
                             alt="Best Rivals Script Full Preview" 
-                            class="max-w-full max-h-[480px] w-auto h-auto object-contain rounded-lg shadow-2xl group-hover:scale-[1.01] transition-transform duration-300"
+                            class="max-w-full max-h-[500px] w-auto h-auto object-contain rounded-lg shadow-2xl transition-transform duration-500 group-hover:scale-[1.015] cursor-pointer"
+                            onclick="openImageLightbox()"
                             onerror="this.style.display='none'; document.getElementById('imageFallback').classList.remove('hidden');"
                         />
                         
-                        <!-- Fallback Banner in case Discord link fails or expires -->
-                        <div id="imageFallback" class="hidden w-full py-16 flex flex-col items-center justify-center p-6 text-center bg-gradient-to-br from-indigo-950 via-slate-950 to-black">
-                            <div class="w-16 h-16 rounded-2xl bg-cyan-500/20 border border-cyan-400/50 flex items-center justify-center mb-3">
-                                <i class="fa-solid fa-bolt text-3xl text-cyan-400"></i>
+                        <!-- Image Fallback Display -->
+                        <div id="imageFallback" class="hidden w-full py-20 flex flex-col items-center justify-center p-6 text-center bg-gradient-to-br from-indigo-950/80 via-slate-950 to-black">
+                            <div class="w-16 h-16 rounded-2xl bg-cyan-500/20 border border-cyan-400/50 flex items-center justify-center mb-3 shadow-lg shadow-cyan-500/30">
+                                <i class="fa-solid fa-shield-halved text-3xl text-cyan-400"></i>
                             </div>
-                            <h4 class="text-xl font-black text-white">BEST RIVALS SCRIPT</h4>
-                            <p class="text-xs text-brand-electric mt-1 font-mono">v0.9.5e • Undetected & Active</p>
+                            <h4 class="font-display text-xl font-bold text-white">BEST RIVALS SCRIPT</h4>
+                            <p class="text-xs text-cyber-cyan mt-1 font-mono">v0.9.5e • 100% Safe & Undetected</p>
                         </div>
 
-                        <!-- Top Floating Badges -->
-                        <div class="absolute top-4 left-4 bg-slate-950/85 backdrop-blur-md px-3 py-1.5 rounded-lg border border-cyan-500/40 text-xs font-semibold text-white flex items-center gap-2 shadow-lg">
-                            <i class="fa-solid fa-bolt text-yellow-400 animate-pulse"></i>
-                            <span>Full Visual Showcase</span>
+                        <!-- Hover Overlay Lightbox Trigger -->
+                        <div onclick="openImageLightbox()" class="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center cursor-pointer pointer-events-auto">
+                            <span class="px-4 py-2 rounded-xl bg-slate-900/90 text-white font-mono text-xs border border-cyan-400/50 flex items-center gap-2 shadow-2xl">
+                                <i class="fa-solid fa-expand text-cyber-cyan"></i> Click to View Fullscreen
+                            </span>
+                        </div>
+
+                        <!-- Top Floating Badge -->
+                        <div class="absolute top-4 left-4 bg-slate-950/85 backdrop-blur-md px-3 py-1.5 rounded-lg border border-cyan-500/40 text-[11px] font-semibold text-white flex items-center gap-2 shadow-lg">
+                            <i class="fa-solid fa-bolt-lightning text-yellow-400 animate-pulse"></i>
+                            <span>100% Full Showcase</span>
                         </div>
                     </div>
                 </div>
 
-                <!-- Features Badges Grid -->
-                <div class="glass-card rounded-2xl p-5 border border-cyan-900/40">
-                    <h3 class="text-xs uppercase tracking-wider font-extrabold text-cyan-400 mb-3.5 flex items-center gap-2">
-                        <i class="fa-solid fa-layer-group"></i> Exclusive Script Features
+                <!-- Script Features Grid -->
+                <div class="glass-panel rounded-2xl p-5 border border-cyan-900/40">
+                    <h3 class="text-xs font-display uppercase tracking-widest font-extrabold text-cyber-cyan mb-4 flex items-center gap-2">
+                        <i class="fa-solid fa-cubes text-purple-400"></i> Feature Execution Suite
                     </h3>
                     <div class="grid grid-cols-2 sm:grid-cols-3 gap-3">
-                        <div class="flex items-center space-x-2.5 bg-slate-900/80 border border-slate-800 rounded-xl p-3 text-xs font-semibold text-gray-200 hover:border-cyan-500/50 transition-colors">
+                        <div class="glass-panel-hover flex items-center space-x-2.5 bg-slate-950/70 border border-slate-800 rounded-xl p-3 text-xs font-semibold text-gray-200">
                             <i class="fa-solid fa-crosshairs text-red-400 text-sm"></i>
                             <span>Silent Aim</span>
                         </div>
-                        <div class="flex items-center space-x-2.5 bg-slate-900/80 border border-slate-800 rounded-xl p-3 text-xs font-semibold text-gray-200 hover:border-cyan-500/50 transition-colors">
+                        <div class="glass-panel-hover flex items-center space-x-2.5 bg-slate-950/70 border border-slate-800 rounded-xl p-3 text-xs font-semibold text-gray-200">
                             <i class="fa-solid fa-mobile-screen-button text-blue-400 text-sm"></i>
                             <span>Device Spoof</span>
                         </div>
-                        <div class="flex items-center space-x-2.5 bg-slate-900/80 border border-slate-800 rounded-xl p-3 text-xs font-semibold text-gray-200 hover:border-cyan-500/50 transition-colors">
+                        <div class="glass-panel-hover flex items-center space-x-2.5 bg-slate-950/70 border border-slate-800 rounded-xl p-3 text-xs font-semibold text-gray-200">
                             <i class="fa-solid fa-skull text-purple-400 text-sm"></i>
                             <span>Ragebot</span>
                         </div>
-                        <div class="flex items-center space-x-2.5 bg-slate-900/80 border border-slate-800 rounded-xl p-3 text-xs font-semibold text-gray-200 hover:border-cyan-500/50 transition-colors">
+                        <div class="glass-panel-hover flex items-center space-x-2.5 bg-slate-950/70 border border-slate-800 rounded-xl p-3 text-xs font-semibold text-gray-200">
                             <i class="fa-solid fa-shield-halved text-emerald-400 text-sm"></i>
                             <span>HvH</span>
                         </div>
-                        <div class="flex items-center space-x-2.5 bg-slate-900/80 border border-slate-800 rounded-xl p-3 text-xs font-semibold text-gray-200 hover:border-cyan-500/50 transition-colors">
+                        <div class="glass-panel-hover flex items-center space-x-2.5 bg-slate-950/70 border border-slate-800 rounded-xl p-3 text-xs font-semibold text-gray-200">
                             <i class="fa-solid fa-gun text-amber-400 text-sm"></i>
                             <span>Aimbot</span>
                         </div>
-                        <div class="flex items-center space-x-2.5 bg-slate-900/80 border border-slate-800 rounded-xl p-3 text-xs font-semibold text-gray-200 hover:border-cyan-500/50 transition-colors">
-                            <i class="fa-solid fa-mask text-indigo-400 text-sm"></i>
+                        <div class="glass-panel-hover flex items-center space-x-2.5 bg-slate-950/70 border border-slate-800 rounded-xl p-3 text-xs font-semibold text-gray-200">
+                            <i class="fa-solid fa-user-ninja text-indigo-400 text-sm"></i>
                             <span>General Spoofing</span>
                         </div>
                     </div>
@@ -258,97 +284,94 @@
 
             </div>
 
-            <!-- Right Side: Product Details & Purchase Box -->
+            <!-- Right Side: Details & Buy CTA Card -->
             <div class="lg:col-span-5 space-y-6">
-                <div class="glass-card rounded-2xl p-6 md:p-8 border border-cyan-500/30 relative overflow-hidden">
+                <div class="glass-panel rounded-2xl p-6 md:p-8 border border-cyan-500/30 relative overflow-hidden">
                     
-                    <!-- Decorative Background Electric Aura -->
-                    <div class="absolute -top-24 -right-24 w-48 h-48 bg-cyan-500/10 rounded-full blur-3xl pointer-events-none"></div>
-
                     <!-- Title Header -->
                     <div class="mb-5">
-                        <div class="flex items-center gap-2 mb-1.5">
-                            <span class="px-2.5 py-0.5 rounded-full bg-cyan-500/20 text-brand-electric text-[10px] font-extrabold uppercase tracking-widest border border-cyan-400/30">
-                                Official License
+                        <div class="flex items-center gap-2 mb-2">
+                            <span class="px-2.5 py-0.5 rounded-full bg-cyan-500/20 text-cyber-cyan text-[10px] font-mono font-extrabold uppercase tracking-widest border border-cyan-400/30">
+                                Verified Hub Key
                             </span>
                         </div>
-                        <h1 class="text-2xl md:text-3xl font-black tracking-tight text-white">
+                        <h1 class="font-display text-2xl md:text-3xl font-black tracking-tight text-white">
                             BEST RIVALS SCRIPT
                         </h1>
-                        <p class="text-gray-400 text-xs mt-1.5">Premium Rivals Hub execution suite with high protection & full features.</p>
+                        <p class="text-gray-400 text-xs mt-1.5">Unmatched performance, stealth bypass, and premier Rivals execution.</p>
                     </div>
 
-                    <!-- Current Script Status Block -->
-                    <div class="mb-5 p-4 rounded-xl bg-slate-950/80 border border-slate-800">
+                    <!-- Current Script Status Indicator -->
+                    <div class="mb-5 p-4 rounded-xl bg-slate-950/90 border border-slate-800">
                         <div class="flex items-center justify-between mb-2">
-                            <span class="text-[11px] text-gray-400 font-bold uppercase tracking-wider">Current Status</span>
-                            <button onclick="openStatusModal()" class="text-xs text-brand-electric hover:underline flex items-center gap-1 font-semibold">
+                            <span class="text-[11px] text-gray-400 font-extrabold uppercase tracking-wider font-mono">Current Status</span>
+                            <button onclick="openStatusModal()" class="text-xs text-cyber-cyan hover:underline flex items-center gap-1 font-semibold">
                                 <span>Legend</span>
-                                <i class="fa-solid fa-chevron-right text-[10px]"></i>
+                                <i class="fa-solid fa-circle-question text-[11px]"></i>
                             </button>
                         </div>
-                        <div class="flex items-center space-x-2 text-sm font-bold text-emerald-400 mb-1">
-                            <span class="text-base">🟢</span>
-                            <span>Safe (undetected)</span>
+                        <div class="flex items-center space-x-2.5 text-sm font-bold text-emerald-400 mb-1">
+                            <span class="text-base animate-pulse">🟢</span>
+                            <span class="tracking-wide">Safe (undetected)</span>
                         </div>
                         <div class="text-xs font-mono text-gray-400">
                             Version: <span class="text-cyan-300 font-semibold">V0.9.5e</span>
                         </div>
                     </div>
 
-                    <!-- Details & Specifications -->
+                    <!-- Specifications Breakdown -->
                     <div class="space-y-2.5 mb-6">
                         <!-- Development Time -->
-                        <div class="flex items-center justify-between p-3 rounded-xl bg-slate-900/60 border border-slate-800">
+                        <div class="flex items-center justify-between p-3 rounded-xl bg-slate-950/60 border border-slate-800/80">
                             <div class="flex items-center space-x-3 text-gray-300">
                                 <div class="w-8 h-8 rounded-lg bg-indigo-500/20 border border-indigo-500/30 flex items-center justify-center text-indigo-400 text-xs">
-                                    <i class="fa-solid fa-clock-rotate-left"></i>
+                                    <i class="fa-solid fa-code-commit"></i>
                                 </div>
                                 <span class="text-xs font-medium">Development Time</span>
                             </div>
-                            <span class="text-xs font-bold text-white">Approx. 5 months</span>
+                            <span class="text-xs font-bold text-white font-mono">Approx. 5 months</span>
                         </div>
 
                         <!-- Active Users -->
-                        <div class="flex items-center justify-between p-3 rounded-xl bg-slate-900/60 border border-slate-800">
+                        <div class="flex items-center justify-between p-3 rounded-xl bg-slate-950/60 border border-slate-800/80">
                             <div class="flex items-center space-x-3 text-gray-300">
                                 <div class="w-8 h-8 rounded-lg bg-blue-500/20 border border-blue-500/30 flex items-center justify-center text-blue-400 text-xs">
                                     <i class="fa-solid fa-users"></i>
                                 </div>
                                 <span class="text-xs font-medium">Active Users</span>
                             </div>
-                            <span class="text-xs font-bold text-white">2 Users</span>
+                            <span class="text-xs font-bold text-white font-mono">2 Users</span>
                         </div>
 
                         <!-- Stock Left -->
-                        <div class="flex items-center justify-between p-3 rounded-xl bg-slate-900/60 border border-slate-800">
+                        <div class="flex items-center justify-between p-3 rounded-xl bg-slate-950/60 border border-slate-800/80">
                             <div class="flex items-center space-x-3 text-gray-300">
                                 <div class="w-8 h-8 rounded-lg bg-red-500/20 border border-red-500/30 flex items-center justify-center text-red-400 text-xs">
                                     <i class="fa-solid fa-boxes-stacked"></i>
                                 </div>
                                 <span class="text-xs font-medium">Rivals Stock</span>
                             </div>
-                            <span class="text-xs font-bold px-2.5 py-1 rounded-md bg-red-500/20 text-red-400 border border-red-500/40">
+                            <span class="text-xs font-bold px-2.5 py-1 rounded-md bg-red-500/20 text-red-400 border border-red-500/40 font-mono">
                                 1 Unit Left
                             </span>
                         </div>
 
                         <!-- Price Tag -->
-                        <div class="flex items-center justify-between p-3.5 rounded-xl bg-gradient-to-r from-cyan-950/60 to-purple-950/60 border border-cyan-500/40">
+                        <div class="flex items-center justify-between p-3.5 rounded-xl bg-gradient-to-r from-cyan-950/60 to-purple-950/60 border border-cyan-500/40 shadow-inner">
                             <div class="flex items-center space-x-3 text-gray-300">
-                                <div class="w-8 h-8 rounded-lg bg-cyan-400/20 flex items-center justify-center text-brand-electric text-xs">
-                                    <i class="fa-solid fa-tag"></i>
+                                <div class="w-8 h-8 rounded-lg bg-yellow-500/20 border border-yellow-500/30 flex items-center justify-center text-yellow-400 text-xs font-bold">
+                                    R$
                                 </div>
                                 <span class="text-xs font-bold text-white">Price</span>
                             </div>
-                            <span class="text-xl font-black text-brand-electric">70 Robux</span>
+                            <span class="font-display text-xl font-black text-cyber-cyan">70 Robux</span>
                         </div>
                     </div>
 
-                    <!-- Main Purchase Button -->
+                    <!-- Buy CTA Button -->
                     <button 
                         onclick="openCheckoutModal()"
-                        class="w-full py-4 px-6 rounded-xl font-extrabold text-white btn-electric flex items-center justify-center space-x-2 text-sm cursor-pointer uppercase tracking-wider">
+                        class="w-full py-4 px-6 rounded-xl font-display font-extrabold text-white btn-cyber flex items-center justify-center space-x-2 text-sm cursor-pointer uppercase tracking-wider">
                         <i class="fa-solid fa-bolt text-yellow-300"></i>
                         <span>Buy Now</span>
                     </button>
@@ -359,72 +382,71 @@
     </main>
 
     <!-- Footer -->
-    <footer class="relative z-10 border-t border-slate-900/90 py-6 text-center text-xs text-gray-500 glass-card">
+    <footer class="relative z-10 border-t border-slate-900/90 py-6 text-center text-xs text-gray-500 glass-panel">
         <p>© 2026 RIVALS HUB. All rights reserved. Powered by RIVALS SCRIPT Team.</p>
     </footer>
 
     <!-- SCRIPT STATUS LEGEND MODAL -->
-    <div id="statusModal" class="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/85 modal-blur hidden">
-        <div class="glass-card w-full max-w-md rounded-2xl p-6 border border-cyan-500/40 shadow-2xl relative">
+    <div id="statusModal" class="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/85 modal-backdrop hidden">
+        <div class="glass-panel w-full max-w-md rounded-2xl p-6 border border-cyan-500/40 shadow-2xl relative">
             <button onclick="closeModals()" class="absolute top-4 right-4 text-gray-400 hover:text-white transition-colors">
                 <i class="fa-solid fa-xmark text-xl"></i>
             </button>
 
             <div class="mb-5">
-                <h2 class="text-lg font-black text-white flex items-center gap-2">
-                    <i class="fa-solid fa-bolt text-brand-electric"></i>
+                <h2 class="font-display text-lg font-bold text-white flex items-center gap-2">
+                    <i class="fa-solid fa-sliders text-cyber-cyan"></i>
                     Script Status Definition
                 </h2>
                 <p class="text-xs text-gray-400 mt-1">Status key for Rivals Hub scripts.</p>
             </div>
 
-            <!-- Status Indicator List -->
+            <!-- Status List -->
             <div class="space-y-2.5 text-sm mb-6">
-                <div class="p-3 rounded-xl bg-slate-900/90 border border-slate-800 flex items-center space-x-3">
+                <div class="p-3 rounded-xl bg-slate-950/90 border border-slate-800 flex items-center space-x-3">
                     <span class="text-lg">🟢</span>
                     <span class="font-bold text-emerald-400">Safe (undetected)</span>
                 </div>
-                <div class="p-3 rounded-xl bg-slate-900/90 border border-slate-800 flex items-center space-x-3">
+                <div class="p-3 rounded-xl bg-slate-950/90 border border-slate-800 flex items-center space-x-3">
                     <span class="text-lg">🟡</span>
                     <span class="font-bold text-yellow-400">Use at your own risk</span>
                 </div>
-                <div class="p-3 rounded-xl bg-slate-900/90 border border-slate-800 flex items-center space-x-3">
+                <div class="p-3 rounded-xl bg-slate-950/90 border border-slate-800 flex items-center space-x-3">
                     <span class="text-lg">🔴</span>
                     <span class="font-bold text-red-400">Down or Detected</span>
                 </div>
-                <div class="p-3 rounded-xl bg-slate-900/90 border border-slate-800 flex items-center space-x-3">
+                <div class="p-3 rounded-xl bg-slate-950/90 border border-slate-800 flex items-center space-x-3">
                     <span class="text-lg">🟣</span>
                     <span class="font-bold text-purple-400">Development</span>
                 </div>
-                <div class="p-3 rounded-xl bg-slate-900/90 border border-slate-800 flex items-center space-x-3">
+                <div class="p-3 rounded-xl bg-slate-950/90 border border-slate-800 flex items-center space-x-3">
                     <span class="text-lg">🖤</span>
                     <span class="font-bold text-gray-400">Test (down)</span>
                 </div>
             </div>
 
-            <!-- Active Status Summary -->
-            <div class="p-3 bg-emerald-950/40 border border-emerald-500/30 rounded-xl mb-6 text-xs text-emerald-300">
-                Current Status: 🟢 <strong>Safe (undetected)</strong> • Version V0.9.5e
+            <!-- Active Status Box -->
+            <div class="p-3 bg-emerald-950/40 border border-emerald-500/30 rounded-xl mb-6 text-xs text-emerald-300 flex items-center justify-between">
+                <span>Current Status: 🟢 <strong>Safe (undetected)</strong></span>
+                <span class="font-mono text-cyan-300">V0.9.5e</span>
             </div>
 
-            <button onclick="closeModals()" class="w-full py-2.5 rounded-xl bg-slate-800 hover:bg-slate-700 text-xs font-bold text-white transition-colors">
+            <button onclick="closeModals()" class="w-full py-3 rounded-xl bg-slate-800 hover:bg-slate-700 text-xs font-bold text-white transition-colors">
                 Close
             </button>
         </div>
     </div>
 
-    <!-- INTERACTIVE STEP 1 MODAL: Discord Username & Payment Method -->
-    <div id="step1Modal" class="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/85 modal-blur hidden">
-        <div class="glass-card w-full max-w-lg rounded-2xl p-6 md:p-8 border border-cyan-500/40 shadow-2xl relative">
-            <!-- Close Button -->
+    <!-- INTERACTIVE STEP 1 MODAL: Contact & Payment Selection -->
+    <div id="step1Modal" class="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/85 modal-backdrop hidden">
+        <div class="glass-panel w-full max-w-lg rounded-2xl p-6 md:p-8 border border-cyan-500/40 shadow-2xl relative">
             <button onclick="closeModals()" class="absolute top-4 right-4 text-gray-400 hover:text-white transition-colors">
                 <i class="fa-solid fa-xmark text-xl"></i>
             </button>
 
-            <!-- Header -->
             <div class="mb-6">
-                <span class="text-xs font-extrabold uppercase tracking-wider text-brand-electric">Step 1 of 2</span>
-                <h2 class="text-xl font-bold text-white mt-1">Contact & Delivery Information</h2>
+                <span class="text-xs font-mono font-extrabold uppercase tracking-wider text-cyber-cyan">Step 1 of 2</span>
+                <h2 class="font-display text-xl font-bold text-white mt-1">Contact & Delivery Details</h2>
                 <p class="text-xs text-gray-400 mt-1">Please enter your Discord details to link your license delivery.</p>
             </div>
 
@@ -443,7 +465,7 @@
                             id="discordUsername" 
                             required 
                             placeholder="e.g., discord_username or 1234567890" 
-                            class="w-full pl-10 pr-4 py-3 bg-slate-950/90 border border-slate-700 rounded-xl text-sm text-white placeholder-gray-500 focus:outline-none focus:border-cyan-400 focus:ring-1 focus:ring-cyan-400 transition-all"
+                            class="w-full pl-10 pr-4 py-3 bg-slate-950/90 border border-slate-700 rounded-xl text-sm text-white placeholder-gray-500 focus:outline-none focus:border-cyan-400 focus:ring-1 focus:ring-cyan-400 transition-all font-mono"
                         >
                     </div>
                 </div>
@@ -467,10 +489,10 @@
                     </div>
                 </div>
 
-                <!-- Pay with Robux Button -->
+                <!-- Submit Button -->
                 <button 
                     type="submit" 
-                    class="w-full py-3.5 px-6 rounded-xl font-extrabold text-white btn-electric flex items-center justify-center space-x-2 text-sm cursor-pointer mt-4 uppercase">
+                    class="w-full py-3.5 px-6 rounded-xl font-display font-extrabold text-white btn-cyber flex items-center justify-center space-x-2 text-sm cursor-pointer mt-4 uppercase tracking-wider">
                     <span>Pay with Robux</span>
                     <i class="fa-solid fa-arrow-right text-xs"></i>
                 </button>
@@ -478,48 +500,42 @@
         </div>
     </div>
 
-    <!-- INTERACTIVE STEP 2 MODAL: Final Payment Instructions -->
-    <div id="step2Modal" class="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/85 modal-blur hidden">
-        <div class="glass-card w-full max-w-lg rounded-2xl p-6 md:p-8 border border-cyan-500/40 shadow-2xl relative">
-            <!-- Close Button -->
+    <!-- INTERACTIVE STEP 2 MODAL: Robux Transfer Instructions -->
+    <div id="step2Modal" class="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/85 modal-backdrop hidden">
+        <div class="glass-panel w-full max-w-lg rounded-2xl p-6 md:p-8 border border-cyan-500/40 shadow-2xl relative">
             <button onclick="closeModals()" class="absolute top-4 right-4 text-gray-400 hover:text-white transition-colors">
                 <i class="fa-solid fa-xmark text-xl"></i>
             </button>
 
-            <!-- Header -->
             <div class="mb-5">
-                <span class="text-xs font-extrabold uppercase tracking-wider text-emerald-400">Step 2 of 2</span>
-                <h2 class="text-xl font-bold text-white mt-1">Payment & Transfer Instructions</h2>
-                <p class="text-xs text-gray-400 mt-1">Complete the steps below to finish your Robux purchase.</p>
+                <span class="text-xs font-mono font-extrabold uppercase tracking-wider text-emerald-400">Step 2 of 2</span>
+                <h2 class="font-display text-xl font-bold text-white mt-1">Payment Instructions</h2>
+                <p class="text-xs text-gray-400 mt-1">Complete the steps below to receive your script key.</p>
             </div>
 
-            <!-- Step by Step Instructions Box -->
+            <!-- Step Guide -->
             <div class="space-y-3.5 bg-slate-950/90 p-4 rounded-xl border border-slate-800 mb-5 text-sm">
-                <!-- Step 1 -->
                 <div class="flex items-start space-x-3">
-                    <span class="w-6 h-6 rounded-full bg-cyan-500/20 text-brand-electric font-bold text-xs flex items-center justify-center flex-shrink-0 mt-0.5 border border-cyan-400/30">1</span>
+                    <span class="w-6 h-6 rounded-full bg-cyan-500/20 text-cyber-cyan font-bold text-xs flex items-center justify-center flex-shrink-0 mt-0.5 border border-cyan-400/30">1</span>
                     <div class="text-gray-200 text-xs md:text-sm">
-                        Send <strong class="text-yellow-300">70 Robux</strong> to <span class="bg-slate-800 px-2 py-0.5 rounded text-cyan-300 font-mono font-bold select-all">koyohwan2e</span> on Roblox.
+                        Send <strong class="text-yellow-300">70 Robux</strong> in Roblox to <span class="bg-slate-800 px-2 py-0.5 rounded text-cyan-300 font-mono font-bold select-all">koyohwan2e</span>.
                     </div>
                 </div>
 
-                <!-- Step 2 -->
                 <div class="flex items-start space-x-3">
-                    <span class="w-6 h-6 rounded-full bg-cyan-500/20 text-brand-electric font-bold text-xs flex items-center justify-center flex-shrink-0 mt-0.5 border border-cyan-400/30">2</span>
+                    <span class="w-6 h-6 rounded-full bg-cyan-500/20 text-cyber-cyan font-bold text-xs flex items-center justify-center flex-shrink-0 mt-0.5 border border-cyan-400/30">2</span>
                     <div class="text-gray-200 text-xs md:text-sm">
                         Open a ticket in our Discord server and screenshot the sent Robux proof.
                     </div>
                 </div>
 
-                <!-- Step 3 -->
                 <div class="flex items-start space-x-3">
-                    <span class="w-6 h-6 rounded-full bg-cyan-500/20 text-brand-electric font-bold text-xs flex items-center justify-center flex-shrink-0 mt-0.5 border border-cyan-400/30">3</span>
+                    <span class="w-6 h-6 rounded-full bg-cyan-500/20 text-cyber-cyan font-bold text-xs flex items-center justify-center flex-shrink-0 mt-0.5 border border-cyan-400/30">3</span>
                     <div class="text-gray-200 text-xs md:text-sm">
-                        Send the screenshot in the ticket. An administrator will verify it.
+                        Send the screenshot in the ticket for staff verification.
                     </div>
                 </div>
 
-                <!-- Step 4 -->
                 <div class="flex items-start space-x-3">
                     <span class="w-6 h-6 rounded-full bg-emerald-500/20 text-emerald-400 font-bold text-xs flex items-center justify-center flex-shrink-0 mt-0.5 border border-emerald-400/30">4</span>
                     <div class="text-gray-200 text-xs md:text-sm">
@@ -528,10 +544,10 @@
                 </div>
             </div>
 
-            <!-- Recipient Username Clipboard Box -->
+            <!-- Copy Roblox Account Username -->
             <div class="mb-6 p-3 bg-slate-900/90 rounded-xl border border-slate-800 flex items-center justify-between">
                 <div>
-                    <p class="text-[10px] uppercase font-bold text-gray-400">Roblox Username</p>
+                    <p class="text-[10px] uppercase font-bold text-gray-400 font-mono">Roblox Username</p>
                     <p class="text-sm font-mono font-bold text-cyan-300">koyohwan2e</p>
                 </div>
                 <button 
@@ -545,14 +561,28 @@
             <button 
                 onclick="closeModals()" 
                 class="w-full py-3 px-6 rounded-xl font-bold text-white bg-slate-800 hover:bg-slate-700 transition-colors text-xs uppercase tracking-wider">
-                I Have Sent The Payment
+                I Have Completed The Transfer
             </button>
         </div>
     </div>
 
-    <!-- LIGHTNING CANVAS ANIMATION SCRIPT & LOGIC -->
+    <!-- FULLSCREEN LIGHTBOX MODAL FOR IMAGE -->
+    <div id="imageLightbox" class="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/90 modal-backdrop hidden" onclick="closeImageLightbox()">
+        <div class="relative max-w-5xl max-h-[90vh] flex items-center justify-center">
+            <button onclick="closeImageLightbox()" class="absolute -top-12 right-0 text-white text-2xl hover:text-cyan-400 transition-colors">
+                <i class="fa-solid fa-xmark"></i>
+            </button>
+            <img 
+                src="https://cdn.discordapp.com/attachments/1545735160970874951/1563497327539519610/image.png?ex=6addd7db&is=6adc865b&hm=9a7ea4accfcf7d410e1bb2077f70b53137dce9a6d0a1832933b7df35b2be2540&" 
+                alt="Full Resolution Script Showcase" 
+                class="max-w-full max-h-[85vh] object-contain rounded-xl border border-cyan-500/40 shadow-2xl"
+            />
+        </div>
+    </div>
+
+    <!-- INTERACTIVE SCRIPT LOGIC -->
     <script>
-        // Modal Control Logic
+        // Modal Handlers
         function openCheckoutModal() {
             closeModals();
             document.getElementById('step1Modal').classList.remove('hidden');
@@ -563,10 +593,19 @@
             document.getElementById('statusModal').classList.remove('hidden');
         }
 
+        function openImageLightbox() {
+            document.getElementById('imageLightbox').classList.remove('hidden');
+        }
+
+        function closeImageLightbox() {
+            document.getElementById('imageLightbox').classList.add('hidden');
+        }
+
         function closeModals() {
             document.getElementById('step1Modal').classList.add('hidden');
             document.getElementById('step2Modal').classList.add('hidden');
             document.getElementById('statusModal').classList.add('hidden');
+            document.getElementById('imageLightbox').classList.add('hidden');
         }
 
         function handleStep1Submit(event) {
@@ -578,7 +617,7 @@
             document.getElementById('step2Modal').classList.remove('hidden');
         }
 
-        // Clipboard Helper
+        // Copy Helper
         function copyToClipboard(text, buttonEl) {
             const tempInput = document.createElement("input");
             tempInput.value = text;
@@ -594,15 +633,14 @@
             }, 2000);
         }
 
-        // Close Modals on ESC
         document.addEventListener('keydown', function(e) {
             if (e.key === "Escape") closeModals();
         });
 
-        /* ===================================================
-           DYNAMIC ELECTRIC LIGHTNING / THUNDER CANVAS ENGINE
-           =================================================== */
-        const canvas = document.getElementById('lightningCanvas');
+        /* =========================================================
+           HIGH-TECH DYNAMIC CYBERPUNK ELECTRIC CANVAS ANIMATION
+           ========================================================= */
+        const canvas = document.getElementById('cyberCanvas');
         const ctx = canvas.getContext('2d');
 
         let width, height;
@@ -613,11 +651,10 @@
             width = canvas.width = window.innerWidth;
             height = canvas.height = window.innerHeight;
         }
-
         window.addEventListener('resize', resizeCanvas);
         resizeCanvas();
 
-        // Lightning Bolt Class
+        // Electric Lightning Bolt
         class LightningBolt {
             constructor() {
                 this.reset();
@@ -627,22 +664,20 @@
                 this.x = Math.random() * width;
                 this.y = 0;
                 this.path = [{ x: this.x, y: this.y }];
-                this.life = Math.floor(Math.random() * 15) + 10;
+                this.life = Math.floor(Math.random() * 18) + 12;
                 this.maxLife = this.life;
-                this.alpha = 1;
-                this.width = Math.random() * 2.5 + 1.5;
+                this.width = Math.random() * 2.8 + 1.2;
 
                 let currentX = this.x;
                 let currentY = this.y;
 
                 while (currentY < height) {
-                    currentX += (Math.random() - 0.5) * 60;
-                    currentY += Math.random() * 30 + 10;
+                    currentX += (Math.random() - 0.5) * 50;
+                    currentY += Math.random() * 35 + 15;
                     this.path.push({ x: currentX, y: currentY });
 
-                    // Random spark generation along bolt
-                    if (Math.random() < 0.2) {
-                        particles.push(new SparkParticle(currentX, currentY));
+                    if (Math.random() < 0.25) {
+                        particles.push(new CyberParticle(currentX, currentY));
                     }
                 }
             }
@@ -656,14 +691,13 @@
                     ctx.lineTo(this.path[i].x, this.path[i].y);
                 }
 
-                ctx.strokeStyle = 'rgba(0, 240, 255, ' + (this.life / this.maxLife) + ')';
+                ctx.strokeStyle = `rgba(0, 240, 255, ${this.life / this.maxLife})`;
                 ctx.lineWidth = this.width;
-                ctx.shadowBlur = 15;
+                ctx.shadowBlur = 20;
                 ctx.shadowColor = '#00f0ff';
                 ctx.stroke();
 
-                // Inner core glow
-                ctx.strokeStyle = 'rgba(255, 255, 255, ' + (this.life / this.maxLife) + ')';
+                ctx.strokeStyle = `rgba(255, 255, 255, ${this.life / this.maxLife})`;
                 ctx.lineWidth = this.width * 0.4;
                 ctx.stroke();
 
@@ -675,17 +709,17 @@
             }
         }
 
-        // Floating Electric Spark Particles
-        class SparkParticle {
+        // Cyber Plasma Sparks
+        class CyberParticle {
             constructor(x, y) {
                 this.x = x || Math.random() * width;
                 this.y = y || Math.random() * height;
-                this.vx = (Math.random() - 0.5) * 3;
-                this.vy = (Math.random() - 0.5) * 3;
-                this.size = Math.random() * 2.5 + 0.8;
-                this.life = Math.random() * 40 + 20;
+                this.vx = (Math.random() - 0.5) * 2.5;
+                this.vy = (Math.random() - 0.5) * 2.5;
+                this.size = Math.random() * 2 + 0.8;
+                this.life = Math.random() * 50 + 25;
                 this.maxLife = this.life;
-                this.color = Math.random() > 0.5 ? '#00f0ff' : '#a855f7';
+                this.color = Math.random() > 0.4 ? '#00f0ff' : '#a855f7';
             }
 
             update() {
@@ -698,7 +732,7 @@
                 ctx.save();
                 ctx.globalAlpha = this.life / this.maxLife;
                 ctx.fillStyle = this.color;
-                ctx.shadowBlur = 10;
+                ctx.shadowBlur = 8;
                 ctx.shadowColor = this.color;
                 ctx.beginPath();
                 ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
@@ -707,35 +741,28 @@
             }
         }
 
-        // Initialize particles
-        for (let i = 0; i < 40; i++) {
-            particles.push(new SparkParticle());
+        for (let i = 0; i < 50; i++) {
+            particles.push(new CyberParticle());
         }
 
-        // Main Animation Loop
         function animate() {
             ctx.clearRect(0, 0, width, height);
 
-            // Randomly trigger lightning strikes
-            if (Math.random() < 0.035) {
+            if (Math.random() < 0.04) {
                 bolts.push(new LightningBolt());
             }
 
-            // Draw & update lightning
             for (let i = bolts.length - 1; i >= 0; i--) {
                 bolts[i].draw();
                 bolts[i].update();
-                if (bolts[i].life <= 0) {
-                    bolts.splice(i, 1);
-                }
+                if (bolts[i].life <= 0) bolts.splice(i, 1);
             }
 
-            // Draw & update particles
             for (let i = particles.length - 1; i >= 0; i--) {
                 particles[i].draw();
                 particles[i].update();
                 if (particles[i].life <= 0) {
-                    particles[i] = new SparkParticle();
+                    particles[i] = new CyberParticle();
                 }
             }
 
