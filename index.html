@@ -183,10 +183,10 @@
                     <span class="hidden md:inline">Discord</span>
                 </a>
 
-                <!-- Version Badge -->
+                <!-- Version Badge (UPDATED TO V0.9.6.2) -->
                 <div class="px-3 py-1.5 rounded-xl bg-purple-500/10 border border-purple-400/30 text-purple-300 text-xs font-mono font-semibold hidden lg:flex items-center gap-1.5">
                     <i class="fa-solid fa-code-branch text-purple-400"></i>
-                    <span>V0.9.5e</span>
+                    <span>V0.9.6.2</span>
                 </div>
             </div>
 
@@ -196,7 +196,7 @@
     <!-- Main Content Container -->
     <main class="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 py-8 sm:py-12 flex-grow w-full space-y-10">
 
-        <!-- Hero Title Banner (ENHANCED STYLING & COLORS) -->
+        <!-- Hero Title Banner -->
         <div class="text-center space-y-4">
             <div class="inline-flex items-center gap-2 px-5 py-1.5 rounded-full bg-slate-950/90 border border-cyan-400/50 text-cyan-300 text-xs font-mono font-bold tracking-widest uppercase shadow-lg shadow-cyan-500/20">
                 <i class="fa-solid fa-bolt-lightning text-amber-300 animate-bounce"></i>
@@ -263,14 +263,14 @@
                                 <i class="fa-solid fa-clock text-yellow-400"></i> ~6 Months
                             </span>
                         </div>
-                        <!-- Active Users (UPDATED TO 3) -->
+                        <!-- Active Users -->
                         <div class="p-3 bg-slate-950/80 rounded-2xl border border-slate-800">
                             <span class="text-gray-400 text-[10px] block uppercase">Active Users</span>
                             <span class="text-sm font-bold text-emerald-400 flex items-center gap-1 mt-0.5">
                                 <i class="fa-solid fa-users text-emerald-400"></i> 3 Users
                             </span>
                         </div>
-                        <!-- Stock Status (UPDATED TO 2) -->
+                        <!-- Stock Status -->
                         <div class="p-3 bg-slate-950/80 rounded-2xl border border-slate-800">
                             <span class="text-gray-400 text-[10px] block uppercase">Stock Level</span>
                             <span class="text-sm font-bold text-rose-400 flex items-center gap-1 mt-0.5">
@@ -486,123 +486,214 @@
         </div>
     </div>
 
-    <!-- MODAL 2: Purchase & Payment Step Modal -->
-    <div id="purchaseModal" class="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/85 backdrop-blur-md hidden">
-        <div class="w-full max-w-lg glass-panel rounded-3xl p-6 sm:p-8 border border-cyan-500/40 relative shadow-2xl">
-            <button onclick="toggleModal('purchaseModal')" class="absolute top-4 right-4 text-gray-400 hover:text-white text-lg">
+    <!-- MODAL 2: EXPANDED & ENHANCED Purchase & Payment Step Modal -->
+    <div id="purchaseModal" class="fixed inset-0 z-50 flex items-center justify-center p-4 sm:p-6 bg-black/90 backdrop-blur-xl hidden overflow-y-auto">
+        <div class="w-full max-w-3xl glass-panel rounded-3xl p-6 sm:p-10 border border-cyan-500/50 relative shadow-2xl my-auto">
+            <button onclick="toggleModal('purchaseModal')" class="absolute top-5 right-5 text-gray-400 hover:text-white text-2xl transition-colors">
                 <i class="fa-solid fa-xmark"></i>
             </button>
 
-            <!-- Step 1: Discord Info & Option Selection -->
-            <div id="step1">
-                <div class="flex items-center gap-2 mb-4">
-                    <span class="px-2.5 py-0.5 rounded-full bg-cyan-500/20 text-cyber-cyan text-xs font-mono font-bold">Step 1 / 2</span>
-                    <h3 class="font-display text-lg font-bold text-white">Robux Order Request</h3>
+            <!-- Step 1: Order Summary & Discord Info -->
+            <div id="step1" class="space-y-6">
+                <div class="flex flex-wrap items-center justify-between gap-3 border-b border-cyan-900/60 pb-5">
+                    <div>
+                        <span class="px-3 py-1 rounded-full bg-cyan-500/20 text-cyber-cyan text-xs font-mono font-bold uppercase tracking-wider">
+                            Step 1 of 2: Order Details
+                        </span>
+                        <h3 class="font-display text-2xl font-black text-white mt-2">Robux Order Request</h3>
+                    </div>
+                    <div class="flex items-center gap-2 bg-emerald-950/80 border border-emerald-500/40 px-3 py-1.5 rounded-xl text-emerald-400 font-mono text-xs">
+                        <i class="fa-solid fa-shield-halved"></i>
+                        <span>Secure Transaction</span>
+                    </div>
                 </div>
 
-                <p class="text-xs text-gray-300 mb-5">
-                    Please provide your Discord username or ID so our team can verify your payment and grant your key.
-                </p>
+                <!-- Product Detail Summary Card -->
+                <div class="p-5 bg-slate-950/90 rounded-2xl border border-cyan-500/30 space-y-4">
+                    <div class="flex items-center justify-between border-b border-slate-800 pb-3">
+                        <div class="flex items-center gap-3">
+                            <div class="w-10 h-10 rounded-xl bg-purple-600/30 border border-purple-400/40 flex items-center justify-center text-purple-300">
+                                <i class="fa-solid fa-key text-lg"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-display font-bold text-white text-base">RIVALS HUB Premium Key</h4>
+                                <p class="text-xs text-gray-400">Lifetime Access • Full Feature Unlocked • Auto Updates</p>
+                            </div>
+                        </div>
+                        <span class="px-3 py-1 bg-amber-500/20 border border-amber-400/40 text-amber-300 font-mono text-xs font-bold rounded-lg">
+                            LIMITED STOCK
+                        </span>
+                    </div>
 
-                <div class="space-y-4 mb-6">
-                    <div>
-                        <label class="block text-xs font-mono uppercase text-gray-400 mb-1.5">Discord Username or ID</label>
+                    <!-- Price breakdown -->
+                    <div class="grid grid-cols-1 sm:grid-cols-3 gap-3 font-mono text-xs">
+                        <div class="p-3 bg-slate-900/80 rounded-xl border border-slate-800">
+                            <span class="text-gray-400 text-[11px] block">Standard Price</span>
+                            <span class="text-gray-300 text-sm line-through">110 Robux</span>
+                        </div>
+                        <div class="p-3 bg-slate-900/80 rounded-xl border border-slate-800">
+                            <span class="text-gray-400 text-[11px] block">Discount Savings</span>
+                            <span class="text-rose-400 text-sm font-bold">-40 Robux (36.36%)</span>
+                        </div>
+                        <div class="p-3 bg-cyan-950/60 rounded-xl border border-cyan-500/40">
+                            <span class="text-cyan-300 text-[11px] block uppercase font-bold">Total Payable</span>
+                            <span class="text-yellow-300 text-base font-extrabold flex items-center gap-1.5">
+                                <i class="fa-solid fa-coins text-yellow-400"></i> 70 Robux
+                            </span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Discord Username Input Form -->
+                <div class="space-y-3">
+                    <label class="block text-xs font-mono uppercase tracking-wider text-cyan-300 font-bold">
+                        <i class="fa-brands fa-discord text-cyber-cyan mr-1"></i> Your Discord Username or User ID
+                    </label>
+                    <div class="relative">
                         <input 
                             type="text" 
                             id="discordUser"
-                            placeholder="e.g. user#1234 or discord_user" 
-                            class="w-full px-4 py-3 bg-slate-950 rounded-xl border border-slate-800 focus:border-cyber-cyan text-white text-sm outline-none transition-colors"
+                            placeholder="e.g. user#1234 or roblox_gamer_99" 
+                            class="w-full px-5 py-4 bg-slate-950 rounded-2xl border-2 border-slate-800 focus:border-cyber-cyan text-white text-sm outline-none transition-all pl-12 font-mono shadow-inner"
                         />
+                        <i class="fa-solid fa-user text-gray-500 absolute left-4 top-1/2 -translate-y-1/2 text-base"></i>
                     </div>
+                    <p class="text-xs text-gray-400">
+                        <i class="fa-solid fa-circle-info text-cyber-cyan mr-1"></i> Needed by our admins to locate your ticket and deliver your key link directly on Discord.
+                    </p>
+                </div>
 
-                    <div class="p-4 bg-slate-950/80 rounded-xl border border-cyan-500/30 flex items-center justify-between">
-                        <div>
-                            <span class="text-xs text-gray-400 block font-mono">Price</span>
-                            <div class="flex items-center gap-2 mt-0.5">
-                                <span class="text-base font-bold text-yellow-300 font-mono">70 Robux</span>
-                                <span class="text-[10px] font-extrabold font-mono bg-rose-500/20 text-rose-400 border border-rose-500/40 px-2 py-0.5 rounded-full">
-                                    36.36% OFF
-                                </span>
-                            </div>
-                        </div>
-                        <span class="text-[11px] font-mono bg-emerald-500/20 text-emerald-300 border border-emerald-500/30 px-2.5 py-1 rounded-full">
-                            2 Units Left
-                        </span>
+                <!-- Warning Notice Box -->
+                <div class="p-4 bg-amber-500/10 border border-amber-500/30 rounded-2xl text-amber-200 text-xs flex items-start gap-3">
+                    <i class="fa-solid fa-triangle-exclamation text-amber-400 text-lg mt-0.5"></i>
+                    <div>
+                        <span class="font-bold uppercase tracking-wider block font-mono text-amber-300">Important Delivery Note</span>
+                        <span>Keys are issued after Robux transaction verification. Average delivery takes 2 to 10 minutes inside our Discord support channel.</span>
                     </div>
                 </div>
 
+                <!-- Next Step Button -->
                 <button 
                     onclick="goToStep2()" 
-                    class="w-full py-3.5 px-6 rounded-xl font-display font-bold text-xs uppercase btn-cyber text-white flex items-center justify-center gap-2">
-                    <span>Pay with Robux</span>
-                    <i class="fa-solid fa-arrow-right"></i>
+                    class="w-full py-4 px-6 rounded-2xl font-display font-black text-sm uppercase tracking-wider btn-cyber text-white flex items-center justify-center gap-3 cursor-pointer shadow-2xl">
+                    <span>Proceed to Robux Payment Instructions</span>
+                    <i class="fa-solid fa-arrow-right text-base"></i>
                 </button>
             </div>
 
-            <!-- Step 2: Robux Transfer Instructions -->
-            <div id="step2" class="hidden space-y-4">
-                <div class="flex items-center justify-between mb-2">
-                    <span class="px-2.5 py-0.5 rounded-full bg-purple-500/20 text-purple-300 text-xs font-mono font-bold">Step 2 / 2</span>
-                    <button onclick="goToStep1()" class="text-xs text-cyber-cyan hover:underline flex items-center gap-1">
-                        <i class="fa-solid fa-arrow-left"></i> Back
+            <!-- Step 2: Robux Transfer Instructions (EXTENDED & DETAILED) -->
+            <div id="step2" class="hidden space-y-6">
+                <div class="flex flex-wrap items-center justify-between gap-3 border-b border-cyan-900/60 pb-5">
+                    <div>
+                        <span class="px-3 py-1 rounded-full bg-purple-500/20 text-purple-300 text-xs font-mono font-bold uppercase tracking-wider">
+                            Step 2 of 2: Payment Verification
+                        </span>
+                        <h3 class="font-display text-2xl font-black text-white mt-2">Robux Transfer Instructions</h3>
+                    </div>
+                    <button onclick="goToStep1()" class="text-xs font-mono text-cyber-cyan hover:underline flex items-center gap-1.5 px-3 py-1.5 bg-slate-900 rounded-xl border border-slate-800">
+                        <i class="fa-solid fa-arrow-left"></i> Change User Details
                     </button>
                 </div>
 
-                <h3 class="font-display text-base font-bold text-white mb-2">Payment Instructions</h3>
-
-                <div class="space-y-3 font-sans text-xs">
+                <!-- Detailed Step Cards Grid -->
+                <div class="space-y-4 font-sans text-xs">
                     
-                    <!-- Instruction 1 -->
-                    <div class="p-3 bg-slate-950/80 rounded-xl border border-slate-800 space-y-1">
-                        <div class="font-bold text-white flex items-center justify-between">
-                            <span>1. Send 70 Robux on Roblox to <span class="text-yellow-400 font-mono">koyohwan2e</span></span>
-                            <button 
-                                onclick="copyText('koyohwan2e', 'copiedTag1')" 
-                                class="text-[10px] bg-cyan-950 text-cyber-cyan border border-cyan-500/40 px-2 py-0.5 rounded hover:bg-cyan-900 transition-colors">
-                                <i class="fa-regular fa-copy"></i> Copy Name
-                            </button>
+                    <!-- Instruction 1: Target Roblox Profile -->
+                    <div class="p-5 bg-slate-950/90 rounded-2xl border border-cyan-500/30 space-y-3">
+                        <div class="flex items-center justify-between">
+                            <span class="font-display text-sm font-bold text-white flex items-center gap-2">
+                                <span class="w-6 h-6 rounded-full bg-cyan-500/20 text-cyber-cyan font-mono text-xs flex items-center justify-center">1</span>
+                                Send 70 Robux to Roblox Recipient
+                            </span>
+                            <span class="text-[10px] font-mono text-yellow-300 bg-yellow-950/60 border border-yellow-500/30 px-2.5 py-1 rounded-full">
+                                Mandatory
+                            </span>
                         </div>
-                        <div id="copiedTag1" class="text-[10px] text-emerald-400 hidden font-mono">Copied to clipboard!</div>
-                    </div>
-
-                    <!-- Instruction 2 -->
-                    <div class="p-3 bg-slate-950/80 rounded-xl border border-slate-800">
-                        <div class="font-bold text-white">2. Open a ticket in our Discord server</div>
-                        <p class="text-gray-400 text-[11px] mt-0.5">Take a screenshot of the sent Robux transaction.</p>
-                    </div>
-
-                    <!-- Instruction 3 -->
-                    <div class="p-3 bg-slate-950/80 rounded-xl border border-slate-800">
-                        <div class="font-bold text-white">3. Send the screenshot in the ticket</div>
-                        <p class="text-gray-400 text-[11px] mt-0.5">An administrator will manually verify your transfer.</p>
-                    </div>
-
-                    <!-- Instruction 4 -->
-                    <div class="p-3 bg-slate-950/80 rounded-xl border border-cyan-500/40 bg-cyan-950/30">
-                        <div class="font-bold text-cyber-cyan flex items-center gap-1.5">
-                            <i class="fa-solid fa-circle-check"></i>
-                            <span>4. Receive key site link</span>
+                        <p class="text-gray-300 text-xs">
+                            Send exactly <strong class="text-yellow-300">70 Robux</strong> via Roblox Gift / Gamepass / Transfer to the following admin account:
+                        </p>
+                        <div class="flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-3 p-3.5 bg-slate-900 rounded-xl border border-slate-800">
+                            <div class="flex items-center gap-3">
+                                <div class="w-9 h-9 rounded-lg bg-yellow-500/20 text-yellow-300 flex items-center justify-center font-bold text-base">
+                                    <i class="fa-solid fa-user-astronaut"></i>
+                                </div>
+                                <div>
+                                    <span class="text-[10px] text-gray-400 block font-mono">Roblox Admin Username</span>
+                                    <span class="font-mono text-base font-bold text-yellow-300">koyohwan2e</span>
+                                </div>
+                            </div>
+                            <div class="flex items-center gap-2">
+                                <button 
+                                    onclick="copyText('koyohwan2e', 'copiedTag1')" 
+                                    class="flex-1 sm:flex-none px-4 py-2 bg-cyan-950 text-cyber-cyan border border-cyan-500/40 rounded-xl hover:bg-cyan-900 transition-colors font-mono font-bold flex items-center justify-center gap-2">
+                                    <i class="fa-regular fa-copy"></i>
+                                    <span>Copy Username</span>
+                                </button>
+                            </div>
                         </div>
-                        <p class="text-gray-300 text-[11px] mt-0.5">
-                            After verification, you will receive the key site link from an administrator.
+                        <div id="copiedTag1" class="text-xs text-emerald-400 hidden font-mono flex items-center gap-1">
+                            <i class="fa-solid fa-check"></i> Username "koyohwan2e" copied to clipboard!
+                        </div>
+                    </div>
+
+                    <!-- Instruction 2: Open Discord Ticket -->
+                    <div class="p-5 bg-slate-950/90 rounded-2xl border border-slate-800 space-y-2">
+                        <div class="flex items-center justify-between">
+                            <span class="font-display text-sm font-bold text-white flex items-center gap-2">
+                                <span class="w-6 h-6 rounded-full bg-purple-500/20 text-purple-300 font-mono text-xs flex items-center justify-center">2</span>
+                                Open Support Ticket in Discord
+                            </span>
+                        </div>
+                        <p class="text-gray-300 text-xs">
+                            Join our official Discord server, navigate to the <strong class="text-purple-300">#ticket-support</strong> channel, and click <strong class="text-purple-300">Create Ticket</strong>.
+                        </p>
+                    </div>
+
+                    <!-- Instruction 3: Screenshot Proof -->
+                    <div class="p-5 bg-slate-950/90 rounded-2xl border border-slate-800 space-y-2">
+                        <div class="flex items-center justify-between">
+                            <span class="font-display text-sm font-bold text-white flex items-center gap-2">
+                                <span class="w-6 h-6 rounded-full bg-pink-500/20 text-pink-300 font-mono text-xs flex items-center justify-center">3</span>
+                                Upload Proof Screenshot
+                            </span>
+                        </div>
+                        <p class="text-gray-300 text-xs">
+                            Attach a screenshot of your Robux transfer transaction history inside your opened ticket thread.
+                        </p>
+                    </div>
+
+                    <!-- Instruction 4: Automated Key Link Grant -->
+                    <div class="p-5 bg-emerald-950/30 rounded-2xl border border-emerald-500/40 space-y-2">
+                        <div class="flex items-center justify-between">
+                            <span class="font-display text-sm font-bold text-emerald-300 flex items-center gap-2">
+                                <i class="fa-solid fa-circle-check text-emerald-400"></i>
+                                Instant Key Site Link Delivery
+                            </span>
+                            <span class="text-[10px] font-mono text-emerald-300 bg-emerald-900/60 border border-emerald-500/40 px-2 py-0.5 rounded">
+                                Final Step
+                            </span>
+                        </div>
+                        <p class="text-gray-200 text-xs">
+                            Once an administrator verifies the 70 Robux payment, your key link and setup guide will be issued directly inside your ticket.
                         </p>
                     </div>
 
                 </div>
 
-                <div class="pt-2 flex items-center gap-2">
+                <!-- Footer Action Buttons -->
+                <div class="pt-2 flex flex-col sm:flex-row items-center gap-3">
                     <a 
                         href="https://discord.gg/FXkppbKqr" 
                         target="_blank" 
                         rel="noopener noreferrer"
-                        class="flex-1 py-3 px-4 rounded-xl font-display font-bold text-xs uppercase btn-discord text-white text-center flex items-center justify-center gap-2">
-                        <i class="fa-brands fa-discord"></i>
-                        <span>Open Discord Server</span>
+                        class="w-full sm:flex-1 py-4 px-6 rounded-2xl font-display font-black text-xs uppercase tracking-wider btn-discord text-white text-center flex items-center justify-center gap-2 cursor-pointer shadow-xl">
+                        <i class="fa-brands fa-discord text-lg"></i>
+                        <span>Open Discord & Create Ticket</span>
                     </a>
                     <button 
                         onclick="toggleModal('purchaseModal')" 
-                        class="py-3 px-4 rounded-xl font-mono text-xs text-gray-400 bg-slate-900 border border-slate-800 hover:text-white hover:bg-slate-800">
-                        Done
+                        class="w-full sm:w-auto py-4 px-6 rounded-2xl font-mono text-xs text-gray-300 bg-slate-900 border border-slate-800 hover:text-white hover:bg-slate-800 transition-colors">
+                        Close Window
                     </button>
                 </div>
             </div>
@@ -640,7 +731,7 @@
                 const tag = document.getElementById(tagId);
                 if (tag) {
                     tag.classList.remove('hidden');
-                    setTimeout(() => tag.classList.add('hidden'), 2000);
+                    setTimeout(() => tag.classList.add('hidden'), 3000);
                 }
             });
         }
