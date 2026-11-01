@@ -183,7 +183,7 @@
                     <span class="hidden md:inline">Discord</span>
                 </a>
 
-                <!-- Version Badge (UPDATED TO V0.9.6.2) -->
+                <!-- Version Badge -->
                 <div class="px-3 py-1.5 rounded-xl bg-purple-500/10 border border-purple-400/30 text-purple-300 text-xs font-mono font-semibold hidden lg:flex items-center gap-1.5">
                     <i class="fa-solid fa-code-branch text-purple-400"></i>
                     <span>V0.9.6.2</span>
@@ -564,146 +564,77 @@
                 </div>
 
                 <!-- Warning Notice Box -->
-                <div class="p-4 bg-amber-500/10 border border-amber-500/30 rounded-2xl text-amber-200 text-xs flex items-start gap-3">
+                <div class="p-4 bg-amber-500/10 border border-amber-500/30 rounded-2xl flex items-start gap-3">
                     <i class="fa-solid fa-triangle-exclamation text-amber-400 text-lg mt-0.5"></i>
-                    <div>
-                        <span class="font-bold uppercase tracking-wider block font-mono text-amber-300">Important Delivery Note</span>
-                        <span>Keys are issued after Robux transaction verification. Average delivery takes 2 to 10 minutes inside our Discord support channel.</span>
-                    </div>
+                    <p class="text-xs text-amber-200/90 leading-relaxed">
+                        Please ensure you join our Discord server before proceeding. Once your Gamepass purchase is verified, support ticket managers will grant your role and key link immediately.
+                    </p>
                 </div>
 
-                <!-- Next Step Button -->
+                <!-- Next Action Button -->
                 <button 
-                    onclick="goToStep2()" 
-                    class="w-full py-4 px-6 rounded-2xl font-display font-black text-sm uppercase tracking-wider btn-cyber text-white flex items-center justify-center gap-3 cursor-pointer shadow-2xl">
-                    <span>Proceed to Robux Payment Instructions</span>
-                    <i class="fa-solid fa-arrow-right text-base"></i>
+                    onclick="goToStep(2)"
+                    class="w-full py-4 px-6 rounded-2xl font-display font-black text-sm uppercase tracking-wider btn-cyber text-white flex items-center justify-center gap-2 cursor-pointer shadow-xl">
+                    <span>Proceed to Payment (Step 2)</span>
+                    <i class="fa-solid fa-arrow-right"></i>
                 </button>
             </div>
 
-            <!-- Step 2: Robux Transfer Instructions (EXTENDED & DETAILED) -->
-            <div id="step2" class="hidden space-y-6">
+            <!-- Step 2: Gamepass Direct Payment -->
+            <div id="step2" class="space-y-6 hidden">
                 <div class="flex flex-wrap items-center justify-between gap-3 border-b border-cyan-900/60 pb-5">
                     <div>
                         <span class="px-3 py-1 rounded-full bg-purple-500/20 text-purple-300 text-xs font-mono font-bold uppercase tracking-wider">
-                            Step 2 of 2: Payment Verification
+                            Step 2 of 2: Gamepass Payment
                         </span>
-                        <h3 class="font-display text-2xl font-black text-white mt-2">Robux Transfer Instructions</h3>
+                        <h3 class="font-display text-2xl font-black text-white mt-2">Complete Gamepass Purchase</h3>
                     </div>
-                    <button onclick="goToStep1()" class="text-xs font-mono text-cyber-cyan hover:underline flex items-center gap-1.5 px-3 py-1.5 bg-slate-900 rounded-xl border border-slate-800">
-                        <i class="fa-solid fa-arrow-left"></i> Change User Details
-                    </button>
-                </div>
-
-                <!-- Detailed Step Cards Grid -->
-                <div class="space-y-4 font-sans text-xs">
-                    
-                    <!-- Instruction 1: Target Roblox Profile -->
-                    <div class="p-5 bg-slate-950/90 rounded-2xl border border-cyan-500/30 space-y-3">
-                        <div class="flex items-center justify-between">
-                            <span class="font-display text-sm font-bold text-white flex items-center gap-2">
-                                <span class="w-6 h-6 rounded-full bg-cyan-500/20 text-cyber-cyan font-mono text-xs flex items-center justify-center">1</span>
-                                Send 70 Robux to Roblox Recipient
-                            </span>
-                            <span class="text-[10px] font-mono text-yellow-300 bg-yellow-950/60 border border-yellow-500/30 px-2.5 py-1 rounded-full">
-                                Mandatory
-                            </span>
-                        </div>
-                        <p class="text-gray-300 text-xs">
-                            Send exactly <strong class="text-yellow-300">70 Robux</strong> via Roblox Gift / Gamepass / Transfer to the following admin account:
-                        </p>
-                        <div class="flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-3 p-3.5 bg-slate-900 rounded-xl border border-slate-800">
-                            <div class="flex items-center gap-3">
-                                <div class="w-9 h-9 rounded-lg bg-yellow-500/20 text-yellow-300 flex items-center justify-center font-bold text-base">
-                                    <i class="fa-solid fa-user-astronaut"></i>
-                                </div>
-                                <div>
-                                    <span class="text-[10px] text-gray-400 block font-mono">Roblox Admin Username</span>
-                                    <span class="font-mono text-base font-bold text-yellow-300">koyohwan2e</span>
-                                </div>
-                            </div>
-                            <div class="flex items-center gap-2">
-                                <button 
-                                    onclick="copyText('koyohwan2e', 'copiedTag1')" 
-                                    class="flex-1 sm:flex-none px-4 py-2 bg-cyan-950 text-cyber-cyan border border-cyan-500/40 rounded-xl hover:bg-cyan-900 transition-colors font-mono font-bold flex items-center justify-center gap-2">
-                                    <i class="fa-regular fa-copy"></i>
-                                    <span>Copy Username</span>
-                                </button>
-                            </div>
-                        </div>
-                        <div id="copiedTag1" class="text-xs text-emerald-400 hidden font-mono flex items-center gap-1">
-                            <i class="fa-solid fa-check"></i> Username "koyohwan2e" copied to clipboard!
-                        </div>
-                    </div>
-
-                    <!-- Instruction 2: Open Discord Ticket -->
-                    <div class="p-5 bg-slate-950/90 rounded-2xl border border-slate-800 space-y-2">
-                        <div class="flex items-center justify-between">
-                            <span class="font-display text-sm font-bold text-white flex items-center gap-2">
-                                <span class="w-6 h-6 rounded-full bg-purple-500/20 text-purple-300 font-mono text-xs flex items-center justify-center">2</span>
-                                Open Support Ticket in Discord
-                            </span>
-                        </div>
-                        <p class="text-gray-300 text-xs">
-                            Join our official Discord server, navigate to the <strong class="text-purple-300">#ticket-support</strong> channel, and click <strong class="text-purple-300">Create Ticket</strong>.
-                        </p>
-                    </div>
-
-                    <!-- Instruction 3: Screenshot Proof -->
-                    <div class="p-5 bg-slate-950/90 rounded-2xl border border-slate-800 space-y-2">
-                        <div class="flex items-center justify-between">
-                            <span class="font-display text-sm font-bold text-white flex items-center gap-2">
-                                <span class="w-6 h-6 rounded-full bg-pink-500/20 text-pink-300 font-mono text-xs flex items-center justify-center">3</span>
-                                Upload Proof Screenshot
-                            </span>
-                        </div>
-                        <p class="text-gray-300 text-xs">
-                            Attach a screenshot of your Robux transfer transaction history inside your opened ticket thread.
-                        </p>
-                    </div>
-
-                    <!-- Instruction 4: Automated Key Link Grant -->
-                    <div class="p-5 bg-emerald-950/30 rounded-2xl border border-emerald-500/40 space-y-2">
-                        <div class="flex items-center justify-between">
-                            <span class="font-display text-sm font-bold text-emerald-300 flex items-center gap-2">
-                                <i class="fa-solid fa-circle-check text-emerald-400"></i>
-                                Instant Key Site Link Delivery
-                            </span>
-                            <span class="text-[10px] font-mono text-emerald-300 bg-emerald-900/60 border border-emerald-500/40 px-2 py-0.5 rounded">
-                                Final Step
-                            </span>
-                        </div>
-                        <p class="text-gray-200 text-xs">
-                            Once an administrator verifies the 70 Robux payment, your key link and setup guide will be issued directly inside your ticket.
-                        </p>
-                    </div>
-
-                </div>
-
-                <!-- Footer Action Buttons -->
-                <div class="pt-2 flex flex-col sm:flex-row items-center gap-3">
-                    <a 
-                        href="https://discord.gg/FXkppbKqr" 
-                        target="_blank" 
-                        rel="noopener noreferrer"
-                        class="w-full sm:flex-1 py-4 px-6 rounded-2xl font-display font-black text-xs uppercase tracking-wider btn-discord text-white text-center flex items-center justify-center gap-2 cursor-pointer shadow-xl">
-                        <i class="fa-brands fa-discord text-lg"></i>
-                        <span>Open Discord & Create Ticket</span>
-                    </a>
                     <button 
-                        onclick="toggleModal('purchaseModal')" 
-                        class="w-full sm:w-auto py-4 px-6 rounded-2xl font-mono text-xs text-gray-300 bg-slate-900 border border-slate-800 hover:text-white hover:bg-slate-800 transition-colors">
-                        Close Window
+                        onclick="goToStep(1)"
+                        class="text-xs font-mono text-cyan-400 hover:underline flex items-center gap-1">
+                        <i class="fa-solid fa-arrow-left"></i> Back to Step 1
                     </button>
+                </div>
+
+                <div class="p-6 bg-slate-950/90 rounded-2xl border border-cyan-500/30 text-center space-y-4">
+                    <div class="w-16 h-16 rounded-full bg-amber-500/20 border border-amber-400/40 text-amber-300 flex items-center justify-center mx-auto text-2xl">
+                        <i class="fa-solid fa-coins"></i>
+                    </div>
+                    <div>
+                        <h4 class="font-display font-bold text-white text-lg">Purchase Official 70 Robux Gamepass</h4>
+                        <p class="text-xs text-gray-400 max-w-md mx-auto mt-1">
+                            Click the button below to open the Roblox Gamepass purchase page. After purchasing, copy your receipt ID or screenshot into your Discord ticket!
+                        </p>
+                    </div>
+
+                    <a 
+                        href="https://www.roblox.com/game-pass/1005822299/RIVALS-HUB-KEY" 
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        class="inline-flex items-center gap-3 py-4 px-8 rounded-2xl font-display font-black text-sm uppercase tracking-wider btn-cyber text-white shadow-xl">
+                        <i class="fa-solid fa-external-link text-base"></i>
+                        <span>Open Gamepass Link (70 Robux)</span>
+                    </a>
+                </div>
+
+                <div class="p-4 bg-slate-900/80 rounded-2xl border border-slate-800 text-xs font-mono text-gray-400 space-y-2">
+                    <div class="text-white font-bold flex items-center gap-2">
+                        <i class="fa-solid fa-check-double text-emerald-400"></i> Next Steps After Purchase:
+                    </div>
+                    <ol class="list-decimal list-inside space-y-1 text-gray-300">
+                        <li>Join the RIVALS HUB Discord Server.</li>
+                        <li>Open a ticket in the <span class="text-cyber-cyan">#key-claim</span> channel.</li>
+                        <li>Provide your Discord Username and Roblox Purchase Proof.</li>
+                    </ol>
                 </div>
             </div>
 
         </div>
     </div>
 
-    <!-- JavaScript Logic -->
+    <!-- Background Lightning Canvas Animation Script -->
     <script>
-        // Modal Toggling Logic
+        // Modal Control Helper
         function toggleModal(modalId) {
             const modal = document.getElementById(modalId);
             if (modal) {
@@ -711,104 +642,72 @@
             }
         }
 
-        function goToStep2() {
-            const userInput = document.getElementById('discordUser').value.trim();
-            if (!userInput) {
-                alert('Please enter your Discord Username or ID before proceeding.');
-                return;
-            }
-            document.getElementById('step1').classList.add('hidden');
-            document.getElementById('step2').classList.remove('hidden');
-        }
-
-        function goToStep1() {
-            document.getElementById('step2').classList.add('hidden');
-            document.getElementById('step1').classList.remove('hidden');
-        }
-
-        function copyText(text, tagId) {
-            navigator.clipboard.writeText(text).then(() => {
-                const tag = document.getElementById(tagId);
-                if (tag) {
-                    tag.classList.remove('hidden');
-                    setTimeout(() => tag.classList.add('hidden'), 3000);
+        function goToStep(stepNumber) {
+            const step1 = document.getElementById('step1');
+            const step2 = document.getElementById('step2');
+            if (stepNumber === 2) {
+                const user = document.getElementById('discordUser').value;
+                if (!user.trim()) {
+                    alert('Please enter your Discord Username before continuing!');
+                    return;
                 }
-            });
+                step1.classList.add('hidden');
+                step2.classList.remove('hidden');
+            } else {
+                step2.classList.add('hidden');
+                step1.classList.remove('hidden');
+            }
         }
 
-        // Canvas Electric Lightning Effect
+        // Cyber Canvas Animation
         const canvas = document.getElementById('cyberCanvas');
         const ctx = canvas.getContext('2d');
+        let width = canvas.width = window.innerWidth;
+        let height = canvas.height = window.innerHeight;
 
-        function resizeCanvas() {
-            canvas.width = window.innerWidth;
-            canvas.height = window.innerHeight;
-        }
-        window.addEventListener('resize', resizeCanvas);
-        resizeCanvas();
+        window.addEventListener('resize', () => {
+            width = canvas.width = window.innerWidth;
+            height = canvas.height = window.innerHeight;
+        });
 
-        let bolts = [];
-
-        class LightningBolt {
+        class Particle {
             constructor() {
                 this.reset();
             }
-
             reset() {
-                this.x = Math.random() * canvas.width;
-                this.y = 0;
-                this.path = [{ x: this.x, y: this.y }];
-                this.life = 0;
-                this.maxLife = Math.random() * 15 + 10;
-                this.color = Math.random() > 0.5 ? '#00f0ff' : '#a855f7';
-                
-                let currX = this.x;
-                let currY = this.y;
-                while (currY < canvas.height) {
-                    currX += (Math.random() - 0.5) * 40;
-                    currY += Math.random() * 30 + 10;
-                    this.path.push({ x: currX, y: currY });
-                }
+                this.x = Math.random() * width;
+                this.y = Math.random() * height;
+                this.vx = (Math.random() - 0.5) * 0.8;
+                this.vy = (Math.random() - 0.5) * 0.8;
+                this.radius = Math.random() * 1.5 + 0.5;
+                this.alpha = Math.random() * 0.5 + 0.2;
             }
-
             update() {
-                this.life++;
-                if (this.life > this.maxLife) {
+                this.x += this.vx;
+                this.y += this.vy;
+                if (this.x < 0 || this.x > width || this.y < 0 || this.y > height) {
                     this.reset();
                 }
             }
-
             draw() {
-                if (Math.random() > 0.6) return;
                 ctx.beginPath();
-                ctx.strokeStyle = this.color;
-                ctx.lineWidth = Math.random() * 2 + 1;
-                ctx.shadowBlur = 15;
-                ctx.shadowColor = this.color;
-
-                for (let i = 0; i < this.path.length - 1; i++) {
-                    ctx.moveTo(this.path[i].x, this.path[i].y);
-                    ctx.lineTo(this.path[i + 1].x, this.path[i + 1].y);
-                }
-                ctx.stroke();
-                ctx.shadowBlur = 0;
+                ctx.arc(this.x, this.y, this.radius, 0, Math.PI * 2);
+                ctx.fillStyle = `rgba(0, 240, 255, ${this.alpha})`;
+                ctx.fill();
             }
         }
 
-        for (let i = 0; i < 3; i++) {
-            bolts.push(new LightningBolt());
-        }
+        const particles = Array.from({ length: 45 }, () => new Particle());
 
-        function animateCanvas() {
-            ctx.clearRect(0, 0, canvas.width, canvas.height);
-            bolts.forEach(bolt => {
-                bolt.update();
-                bolt.draw();
+        function animate() {
+            ctx.clearRect(0, 0, width, height);
+            particles.forEach(p => {
+                p.update();
+                p.draw();
             });
-            requestAnimationFrame(animateCanvas);
+            requestAnimationFrame(animate);
         }
-
-        animateCanvas();
+        animate();
     </script>
 </body>
 </html>
