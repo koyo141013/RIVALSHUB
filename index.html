@@ -183,7 +183,7 @@
                     <span class="hidden md:inline">Discord</span>
                 </a>
 
-                <!-- Version Badge (Updated to V0.9.8.11) -->
+                <!-- Version Badge -->
                 <div class="px-3 py-1.5 rounded-xl bg-purple-500/10 border border-purple-400/30 text-purple-300 text-xs font-mono font-semibold hidden lg:flex items-center gap-1.5">
                     <i class="fa-solid fa-code-branch text-purple-400"></i>
                     <span>V0.9.8.11</span>
@@ -231,7 +231,7 @@
                     </span>
                 </div>
 
-                <!-- Product Preview Image Frame (Updated Image URL) -->
+                <!-- Product Preview Image Frame -->
                 <div class="relative w-full rounded-2xl overflow-hidden bg-slate-950 border border-cyan-500/30 flex items-center justify-center p-2 min-h-[320px] sm:min-h-[420px] group">
                     <img 
                         src="https://cdn.discordapp.com/attachments/1545735160970874951/1566254221282644068/image.png?ex=6ae7df69&is=6ae68de9&hm=9dfc1ae61c0c373ae7d8191c6631a78b1049c58d93b80325b3fc52ae366d1804&" 
@@ -567,7 +567,7 @@
                 <div class="p-4 bg-amber-500/10 border border-amber-500/30 rounded-2xl flex items-start gap-3">
                     <i class="fa-solid fa-triangle-exclamation text-amber-400 text-lg mt-0.5"></i>
                     <p class="text-xs text-amber-200/90 leading-relaxed">
-                        Please ensure you join our Discord server before proceeding. Once your Gamepass purchase is verified, support ticket managers will grant your role and key link immediately.
+                        Please ensure you join our Discord server before proceeding. Once your payment is verified, support ticket managers will grant your role and key link immediately.
                     </p>
                 </div>
 
@@ -580,14 +580,14 @@
                 </button>
             </div>
 
-            <!-- Step 2: Gamepass Direct Payment -->
+            <!-- Step 2: Payment Instructions -->
             <div id="step2" class="space-y-6 hidden">
                 <div class="flex flex-wrap items-center justify-between gap-3 border-b border-cyan-900/60 pb-5">
                     <div>
                         <span class="px-3 py-1 rounded-full bg-purple-500/20 text-purple-300 text-xs font-mono font-bold uppercase tracking-wider">
-                            Step 2 of 2: Gamepass Payment
+                            Step 2 of 2: Payment Instructions
                         </span>
-                        <h3 class="font-display text-2xl font-black text-white mt-2">Complete Gamepass Purchase</h3>
+                        <h3 class="font-display text-2xl font-black text-white mt-2">Robux Payment Guide</h3>
                     </div>
                     <button 
                         onclick="goToStep(1)"
@@ -596,37 +596,29 @@
                     </button>
                 </div>
 
-                <div class="p-6 bg-slate-950/90 rounded-2xl border border-cyan-500/30 text-center space-y-4">
-                    <div class="w-16 h-16 rounded-full bg-amber-500/20 border border-amber-400/40 text-amber-300 flex items-center justify-center mx-auto text-2xl">
-                        <i class="fa-solid fa-coins"></i>
+                <!-- Next Steps Container (Updated Text) -->
+                <div class="p-6 bg-slate-900/90 rounded-2xl border border-cyan-500/30 space-y-4 font-mono text-xs text-gray-300">
+                    <div class="text-white font-bold text-sm flex items-center gap-2 border-b border-slate-800 pb-3">
+                        <i class="fa-solid fa-check-double text-emerald-400 text-base"></i> Next Steps After Purchase:
                     </div>
-                    <div>
-                        <h4 class="font-display font-bold text-white text-lg">Purchase Official 70 Robux Gamepass</h4>
-                        <p class="text-xs text-gray-400 max-w-md mx-auto mt-1">
-                            Click the button below to open the Roblox Gamepass purchase page. After purchasing, copy your receipt ID or screenshot into your Discord ticket!
-                        </p>
-                    </div>
-
-                    <a 
-                        href="https://www.roblox.com/game-pass/1005822299/RIVALS-HUB-KEY" 
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        class="inline-flex items-center gap-3 py-4 px-8 rounded-2xl font-display font-black text-sm uppercase tracking-wider btn-cyber text-white shadow-xl">
-                        <i class="fa-solid fa-external-link text-base"></i>
-                        <span>Open Gamepass Link (70 Robux)</span>
-                    </a>
-                </div>
-
-                <div class="p-4 bg-slate-900/80 rounded-2xl border border-slate-800 text-xs font-mono text-gray-400 space-y-2">
-                    <div class="text-white font-bold flex items-center gap-2">
-                        <i class="fa-solid fa-check-double text-emerald-400"></i> Next Steps After Purchase:
-                    </div>
-                    <ol class="list-decimal list-inside space-y-1 text-gray-300">
-                        <li>Join the RIVALS HUB Discord Server.</li>
-                        <li>Open a ticket in the <span class="text-cyber-cyan">#key-claim</span> channel.</li>
-                        <li>Provide your Discord Username and Roblox Purchase Proof.</li>
+                    <ol class="list-decimal list-inside space-y-2.5 leading-relaxed text-gray-300">
+                        <li>Send 70 Robux to the Roblox username <span class="text-yellow-300 font-bold bg-yellow-950/60 border border-yellow-500/40 px-2 py-0.5 rounded">koyohwan2e</span> and capture proof of payment.</li>
+                        <li>Join our Discord server.</li>
+                        <li>Open a ticket in the ticket channel.</li>
+                        <li>Send the payment proof screenshot to an administrator.</li>
+                        <li>Shortly after, an administrator will provide you with the key website or script.</li>
                     </ol>
                 </div>
+
+                <!-- Join Discord Direct CTA -->
+                <a 
+                    href="https://discord.gg/FXkppbKqr" 
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    class="w-full py-4 px-6 rounded-2xl font-display font-black text-sm uppercase tracking-wider btn-discord text-white flex items-center justify-center gap-2 cursor-pointer shadow-xl">
+                    <i class="fa-brands fa-discord text-lg"></i>
+                    <span>Join Discord Server Now</span>
+                </a>
             </div>
 
         </div>
